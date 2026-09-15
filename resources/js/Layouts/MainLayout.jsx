@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import Header from '../Components/Header';
 import LeftSidebar from '../Components/LeftSidebar';
+import Footer from '../Components/Footer';
 import { ShieldAlert, Gamepad2, Gift, Coins, Crown, Menu } from 'lucide-react';
 
 export default function MainLayout({ children, currentCategory = 'all' }) {
@@ -38,11 +39,14 @@ export default function MainLayout({ children, currentCategory = 'all' }) {
 
         {/* Center Main Content Region */}
         <main
-          className={`flex-1 transition-all duration-300 min-w-0 p-3 sm:p-4 lg:p-6 pb-24 lg:pb-12 ${
+          className={`flex-1 transition-all duration-300 min-w-0 p-3 sm:p-4 lg:p-6 pb-24 lg:pb-12 flex flex-col justify-between ${
             isDesktopSidebarCollapsed ? 'lg:ml-16' : 'lg:ml-60'
           }`}
         >
-          {children}
+          <div className="flex-1">
+            {children}
+          </div>
+          <Footer />
         </main>
       </div>
 
