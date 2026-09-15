@@ -60,7 +60,7 @@ export default function LegalLayout({ title, subtitle, activeTab, children }) {
         </div>
 
         {/* Navigation Tabs Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-[#213743]">
+        <div className="-mx-3 px-3 sm:mx-0 sm:px-0 flex items-center gap-2 overflow-x-auto pb-2 border-b border-[#213743] no-scrollbar">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;

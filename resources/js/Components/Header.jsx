@@ -82,36 +82,37 @@ export default function Header({ onToggleLeftSidebar }) {
             <Menu className="w-5 h-5" />
           </button>
 
-          <Link href="/">
-            <ObsidianLogo className="h-12 sm:h-14 lg:h-16" />
+          <Link href="/" className="flex items-center">
+            <ObsidianLogo className="h-8 sm:h-10 lg:h-12" />
           </Link>
         </div>
 
         {/* Right Section: Balance / Auth Buttons */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3">
           {auth.user ? (
-            <div className="flex items-center gap-2">
-              <div className="flex items-center bg-[#1A2C38] border border-[#213743] rounded-xl p-1 shadow-inner">
-                <div className="flex items-center gap-2 px-2.5 py-1">
-                  <Coins className="w-4 h-4 text-emerald-400 animate-pulse" />
-                  <span className="text-xs text-[#B1BAD3] font-bold">SC</span>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="flex items-center bg-[#1A2C38] border border-[#213743] rounded-xl p-0.5 sm:p-1 shadow-inner">
+                <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-2.5 py-1">
+                  <Coins className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 animate-pulse shrink-0" />
+                  <span className="text-[11px] sm:text-xs text-[#B1BAD3] font-bold">SC</span>
                   <span className="font-mono-numbers font-bold text-white text-xs sm:text-sm">
                     {balance.toFixed(2)}
                   </span>
                   <button
                     onClick={handleManualRefresh}
-                    className={`p-1 text-[#B1BAD3] hover:text-white transition-transform ${isRefreshing ? 'animate-spin' : ''}`}
+                    className={`p-0.5 sm:p-1 text-[#B1BAD3] hover:text-white transition-transform ${isRefreshing ? 'animate-spin' : ''}`}
                     title="Refresh Balance"
                   >
-                    <RefreshCw className="w-3.5 h-3.5" />
+                    <RefreshCw className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   </button>
                 </div>
 
                 <button
                   onClick={() => setIsStoreOpen(true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-[#1475E1] hover:bg-blue-600 text-white font-bold text-xs rounded-lg shadow-md transition-all hover:scale-105"
+                  className="flex items-center gap-1 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-[#1475E1] hover:bg-blue-600 text-white font-bold text-xs rounded-lg shadow-md transition-all hover:scale-105"
+                  title="Buy SC Coins"
                 >
-                  <PlusCircle className="w-4 h-4" />
+                  <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span className="hidden sm:inline">Store</span>
                 </button>
               </div>
@@ -120,7 +121,7 @@ export default function Header({ onToggleLeftSidebar }) {
               <div className="relative">
                 <button
                   onClick={() => setUserDropdown(!userDropdown)}
-                  className="flex items-center gap-2 p-1.5 bg-[#1A2C38] border border-[#213743] rounded-xl hover:border-slate-600 transition-colors"
+                  className="flex items-center gap-2 p-1 sm:p-1.5 bg-[#1A2C38] border border-[#213743] rounded-xl hover:border-slate-600 transition-colors"
                 >
                   <div className="w-7 h-7 rounded-lg bg-[#1475E1] flex items-center justify-center font-bold text-xs text-white">
                     {auth.user.name.substring(0, 2).toUpperCase()}

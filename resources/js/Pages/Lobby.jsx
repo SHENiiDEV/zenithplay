@@ -94,9 +94,9 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
     <MainLayout currentCategory={currentCategory} liveWins={liveWins}>
       <Head title="Velox Play - Next-Gen Social Gaming" />
 
-      <div className="space-y-6 pb-12">
-        {/* Stake-Style Main Hero Banner with Uploaded Artwork */}
-        <div className="relative rounded-3xl overflow-hidden border border-[#213743] min-h-[320px] sm:min-h-[380px] flex items-center justify-center p-4 sm:p-8 lg:p-12 text-center shadow-2xl group">
+      <div className="space-y-5 sm:space-y-6">
+        {/* Stake-Style Main Hero Banner */}
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#213743] min-h-[220px] sm:min-h-[320px] flex items-center justify-center p-3.5 sm:p-8 lg:p-12 text-center shadow-2xl group">
           {/* Background Reference Image */}
           <img
             src="/images/hero-banner.jpg"
@@ -105,31 +105,31 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
           />
 
           {/* Vignette Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F212E] via-black/45 to-black/35 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F212E] via-black/50 to-black/40 pointer-events-none" />
 
           {/* Center Interactive Controls */}
           {auth?.user ? (
             /* Logged-In Player VIP Dashboard Banner */
-            <div className="relative z-10 w-full max-w-3xl space-y-4 text-left">
+            <div className="relative z-10 w-full max-w-3xl space-y-3 sm:space-y-4 text-left">
               {/* Top Card: User Profile & Quick Actions */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#0F212E]/80 backdrop-blur-xl border border-white/10 p-4 sm:p-5 rounded-2xl shadow-2xl">
-                <div className="flex items-center gap-3.5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#0F212E]/85 backdrop-blur-xl border border-white/10 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl shadow-2xl">
+                <div className="flex items-center gap-3 min-w-0">
                   {/* User Initials Badge */}
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#1475E1] to-purple-600 flex items-center justify-center font-black text-lg sm:text-xl text-white shadow-lg shadow-blue-500/30 border border-white/20 shrink-0">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#1475E1] to-purple-600 flex items-center justify-center font-black text-sm sm:text-xl text-white shadow-lg shadow-blue-500/30 border border-white/20 shrink-0">
                     {auth.user.name.substring(0, 2).toUpperCase()}
                   </div>
                   
-                  <div>
+                  <div className="min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h2 className="text-lg sm:text-2xl font-black text-white tracking-tight">
+                      <h2 className="text-sm sm:text-xl font-black text-white tracking-tight truncate">
                         Welcome back, {auth.user.name}!
                       </h2>
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                         ACTIVE
                       </span>
                     </div>
-                    <p className="text-xs font-mono text-[#B1BAD3] mt-0.5 flex items-center gap-2 flex-wrap">
+                    <p className="text-[11px] sm:text-xs font-mono text-[#B1BAD3] mt-0.5 flex items-center gap-1.5 sm:gap-2 flex-wrap">
                       <span>ID: <strong className="text-white">{auth.user.user_code}</strong></span>
                       <span>•</span>
                       <span>Balance: <strong className="text-emerald-400 font-mono-numbers">{auth.user.game_balance.toFixed(2)} SC</strong></span>
@@ -138,10 +138,10 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
                 </div>
 
                 {/* Quick Action Button */}
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center justify-end gap-2 shrink-0">
                   <Link
                     href="/store"
-                    className="px-5 py-2.5 bg-[#1475E1] hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-blue-500/30 transition-all hover:scale-105 flex items-center gap-2 border border-blue-400/30"
+                    className="w-full sm:w-auto justify-center px-4 sm:px-5 py-2 sm:py-2.5 bg-[#1475E1] hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-blue-500/30 transition-all hover:scale-105 flex items-center gap-2 border border-blue-400/30"
                   >
                     <Coins className="w-4 h-4 text-emerald-400" />
                     <span>Coin Store</span>
@@ -150,37 +150,37 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
               </div>
 
               {/* Bottom Card: VIP Level Progress */}
-              <div className="bg-[#0F212E]/80 backdrop-blur-xl border border-white/10 p-4 sm:p-5 rounded-2xl space-y-3 shadow-2xl">
+              <div className="bg-[#0F212E]/85 backdrop-blur-xl border border-white/10 p-3 sm:p-5 rounded-xl sm:rounded-2xl space-y-2 sm:space-y-3 shadow-2xl">
                 <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold shrink-0">
+                  <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-r from-amber-500/20 to-purple-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold shrink-0">
                       <Trophy className="w-4 h-4" />
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                         <span className="text-xs sm:text-sm font-black text-white uppercase tracking-wider">
                           VIP LEVEL {auth.user.vip_level || 1}
                         </span>
-                        <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase text-white bg-gradient-to-r ${userVip.color} shadow-sm`}>
+                        <span className={`px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-black uppercase text-white bg-gradient-to-r ${userVip.color} shadow-sm`}>
                           {userVip.name}
                         </span>
                       </div>
-                      <p className="text-[11px] text-[#B1BAD3] hidden sm:block">
+                      <p className="text-[10px] sm:text-[11px] text-[#B1BAD3] hidden sm:block">
                         Play games to earn XP & unlock exclusive rewards and cashback.
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="text-sm font-black text-cyan-400 font-mono-numbers">{vipPercent}%</span>
-                    <p className="text-[10px] text-[#8A99AD] font-mono-numbers">
+                    <span className="text-xs sm:text-sm font-black text-cyan-400 font-mono-numbers">{vipPercent}%</span>
+                    <p className="text-[9px] sm:text-[10px] text-[#8A99AD] font-mono-numbers">
                       {currentPts.toLocaleString()} / {userVip.nextPts.toLocaleString()} XP
                     </p>
                   </div>
                 </div>
 
                 {/* Animated VIP Progress Bar */}
-                <div className="w-full h-2.5 bg-[#1A2C38] rounded-full p-0.5 border border-[#213743] overflow-hidden">
+                <div className="w-full h-2 bg-[#1A2C38] rounded-full p-0.5 border border-[#213743] overflow-hidden">
                   <div
                     className={`h-full rounded-full bg-gradient-to-r ${userVip.color} shadow-[0_0_12px_rgba(20,117,225,0.8)] transition-all duration-500`}
                     style={{ width: `${vipPercent}%` }}
@@ -190,15 +190,15 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
             </div>
           ) : (
             /* Public Visitor Hero Banner */
-            <div className="relative z-10 max-w-2xl space-y-5">
-              <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] font-sans">
+            <div className="relative z-10 max-w-2xl space-y-4 sm:space-y-5">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] font-sans">
                 World's Largest Online Social Casino
               </h1>
 
               <div>
                 <button
                   onClick={() => setIsAuthModalOpen(true)}
-                  className="px-10 py-3.5 bg-[#1475E1] hover:bg-blue-600 text-white font-black text-sm rounded-xl shadow-xl shadow-blue-500/40 transition-all hover:scale-105 border border-blue-400/30"
+                  className="px-8 sm:px-10 py-3 sm:py-3.5 bg-[#1475E1] hover:bg-blue-600 text-white font-black text-xs sm:text-sm rounded-xl shadow-xl shadow-blue-500/40 transition-all hover:scale-105 border border-blue-400/30"
                 >
                   Register
                 </button>
@@ -208,14 +208,14 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
         </div>
 
         {/* Stake-Style Casino Category Card */}
-        <div className="bg-[#1A2C38] border border-[#213743] hover:border-[#1475E1]/50 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all hover:scale-[1.01] shadow-lg">
+        <div className="bg-[#1A2C38] border border-[#213743] hover:border-[#1475E1]/50 rounded-xl sm:rounded-2xl p-3 sm:p-4 flex items-center justify-between cursor-pointer transition-all hover:scale-[1.01] shadow-lg">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#213743] flex items-center justify-center text-[#1475E1]">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#213743] flex items-center justify-center text-[#1475E1] shrink-0">
               <Gamepad2 className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-white">Casino Lobby</h3>
-              <p className="text-xs text-emerald-400 font-mono-numbers flex items-center gap-1.5">
+              <h3 className="text-xs sm:text-sm font-bold text-white">Casino Lobby</h3>
+              <p className="text-[11px] sm:text-xs text-emerald-400 font-mono-numbers flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                 <span>35,632 active players online</span>
               </p>
@@ -224,19 +224,19 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
         </div>
 
         {/* Search & Filter Bar */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 justify-between">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 justify-between">
           <form onSubmit={handleSearchSubmit} className="relative w-full sm:w-80">
             <Search className="absolute left-3.5 top-3 w-4 h-4 text-[#557086]" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search 2,000+ slots or provider..."
+              placeholder="Search 3,000+ slots or provider..."
               className="w-full pl-10 pr-4 py-2.5 bg-[#1A2C38] border border-[#213743] focus:border-[#1475E1] rounded-xl text-xs text-white placeholder-[#557086] outline-none transition-all"
             />
           </form>
 
-          <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 no-scrollbar">
+          <div className="-mx-3 px-3 sm:mx-0 sm:px-0 flex items-center gap-1.5 sm:gap-2 overflow-x-auto w-auto pb-1 sm:pb-0 no-scrollbar">
             {[
               { id: 'all', label: 'All Games' },
               { id: 'slots', label: 'Slots' },
@@ -247,7 +247,7 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
               <button
                 key={cat.id}
                 onClick={() => router.get('/', { category: cat.id, search: searchTerm }, { preserveState: true })}
-                className={`px-4 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap ${
+                className={`px-3.5 sm:px-4 py-2 text-xs font-bold rounded-xl transition-all whitespace-nowrap shrink-0 ${
                   currentCategory === cat.id
                     ? 'bg-[#1475E1] text-white shadow-lg shadow-blue-500/20'
                     : 'bg-[#1A2C38] text-[#B1BAD3] hover:text-white hover:bg-[#213743]'
