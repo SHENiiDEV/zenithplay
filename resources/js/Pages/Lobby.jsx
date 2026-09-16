@@ -12,6 +12,20 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [loadedGames, setLoadedGames] = useState(games?.data || []);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [activePlayers, setActivePlayers] = useState(() => Math.floor(32000 + Math.random() * 6000));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActivePlayers((prev) => {
+        const delta = Math.floor(Math.random() * 41) - 20; // change by -20 to +20
+        const updated = prev + delta;
+        // Keep within realistic range 28,000 - 45,000
+        return Math.min(Math.max(updated, 28000), 45000);
+      });
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     setLoadedGames(games?.data || []);
@@ -217,7 +231,7 @@ export default function Lobby({ games, featuredGames = [], liveWins = [], curren
               <h3 className="text-xs sm:text-sm font-bold text-white">Casino Lobby</h3>
               <p className="text-[11px] sm:text-xs text-emerald-400 font-mono-numbers flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span>35,632 active players online</span>
+                <span>{activePlayers.toLocaleString()} active players online</span>
               </p>
             </div>
           </div>
