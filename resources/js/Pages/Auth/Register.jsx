@@ -49,7 +49,7 @@ export default function Register({ excludedCountries = [] }) {
 
   return (
     <MainLayout>
-      <Head title="Create Your Free Account - ZPlay Social Casino" />
+      <Head title="Create Your Free Account - ZenithPlay" />
 
       <div className="max-w-6xl mx-auto py-8 sm:py-12 px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -68,7 +68,7 @@ export default function Register({ excludedCountries = [] }) {
                   <span>Welcome Package</span>
                 </div>
                 <h1 className="text-2xl sm:text-3xl font-black text-white leading-tight">
-                  Join ZPlay Social Casino & Claim Your Free Coins
+                  Join ZenithPlay & Claim Your Free Coins
                 </h1>
                 <p className="text-xs sm:text-sm text-[#8F9CAE]">
                   Play over 2,400+ authentic casino games from Pragmatic, Hacksaw, PG Soft and more with instant Sweeps Coins.

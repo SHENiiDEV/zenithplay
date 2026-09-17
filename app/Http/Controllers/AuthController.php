@@ -117,7 +117,7 @@ class AuthController extends Controller
             Log::warning('Failed sending WelcomeRegistrationMail: '.$e->getMessage());
         }
 
-        return redirect()->back()->with('success', 'Account created successfully!');
+        return redirect()->route('profile')->with('success', 'Account created successfully!');
     }
 
     /**
