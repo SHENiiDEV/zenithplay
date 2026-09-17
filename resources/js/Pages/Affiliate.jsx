@@ -14,7 +14,7 @@ export default function Affiliate({ refCode, refLink, commissionRate = '10%', to
 
   return (
     <MainLayout>
-      <Head title="Velox Affiliate & Referral Program" />
+      <Head title="ZenithPlay Affiliate & Referral Program" />
 
       <div className="max-w-6xl mx-auto space-y-8 pb-16">
         {/* Header Hero */}
@@ -23,9 +23,9 @@ export default function Affiliate({ refCode, refLink, commissionRate = '10%', to
             <Users className="w-3.5 h-3.5" />
             <span>EARN PASSIVE SOCIAL COINS</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white">Velox Affiliate Program</h1>
+          <h1 className="text-3xl sm:text-4xl font-black text-white">ZenithPlay Affiliate Program</h1>
           <p className="text-sm text-[#B1BAD3] max-w-2xl">
-            Invite friends to Velox Play and earn an instant <strong className="text-emerald-400">10% SC Bonus</strong> on every store package deposit they make, forever.
+            Invite friends to ZenithPlay and earn an instant <strong className="text-emerald-400">10% SC Bonus</strong> on every store package deposit they make, forever.
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export default function Affiliate({ refCode, refLink, commissionRate = '10%', to
               2
             </div>
             <h3 className="text-lg font-bold text-white">Friends Register</h3>
-            <p className="text-xs text-[#B1BAD3]">Your friends register an account on Velox Play using your referral code.</p>
+            <p className="text-xs text-[#B1BAD3]">Your friends register an account on ZenithPlay using your referral code.</p>
           </div>
 
           <div className="p-6 rounded-2xl bg-[#1A2C38] border border-[#213743] space-y-3">

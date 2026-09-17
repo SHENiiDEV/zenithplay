@@ -25,7 +25,7 @@ export default function VipClub({ userVipPoints = 0, userVipLevel = 1, levels = 
 
   return (
     <MainLayout>
-      <Head title="Velox VIP Club & Account Level Progression" />
+      <Head title="ZenithPlay VIP Club & Account Level Progression" />
 
       <div className="max-w-6xl mx-auto space-y-8 pb-16">
         {/* Header Hero */}

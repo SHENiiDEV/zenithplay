@@ -40,7 +40,7 @@ class GgrGoldApiController extends Controller
             $expectedSecret = env('GGR_AGENT_SECRET');
         }
 
-        if (!empty($expectedSecret) && $secret !== $expectedSecret) {
+        if (! empty($expectedSecret) && $secret !== $expectedSecret) {
             Log::warning('GGR Gold API invalid secret:', ['received' => $secret, 'expected' => $expectedSecret]);
 
             return response()->json([
@@ -108,15 +108,27 @@ class GgrGoldApiController extends Controller
         $roundId = $request->input('round_id');
         $gameCode = $request->input('game_code');
 
-        // Extract nested bet_money & win_money from slot, live, SB, or MN objects
+        // Extract nested bet_money & win_money from slot, live, SB, MN, or FT objects
         $betMoney = 0.00;
         $winMoney = 0.00;
 
-        foreach (['slot', 'live', 'SB', 'MN'] as $key) {
+        foreach (['slot', 'live', 'SB', 'MN', 'FT'] as $key) {
             if ($request->has($key) && is_array($request->input($key))) {
                 $subData = $request->input($key);
                 $betMoney += (float) ($subData['bet_money'] ?? $subData['bet'] ?? 0);
                 $winMoney += (float) ($subData['win_money'] ?? $subData['win'] ?? 0);
+                if (empty($txnIdV2) && ! empty($subData['txn_id_v2'])) {
+                    $txnIdV2 = $subData['txn_id_v2'];
+                }
+                if (empty($txnId) && ! empty($subData['txn_id'])) {
+                    $txnId = $subData['txn_id'];
+                }
+                if (empty($roundId) && ! empty($subData['round_id'])) {
+                    $roundId = $subData['round_id'];
+                }
+                if (empty($gameCode) && ! empty($subData['game_code'])) {
+                    $gameCode = $subData['game_code'];
+                }
             }
         }
 
@@ -127,13 +139,10 @@ class GgrGoldApiController extends Controller
             $winMoney = (float) $request->input('win_money');
         }
 
-        // 1. Idempotency Check
-        $existingTx = GameTransaction::where('txn_id_v2', $txnIdV2)
-            ->orWhere(function ($q) use ($txnId) {
-                if ($txnId) {
-                    $q->where('txn_id', $txnId);
-                }
-            })->first();
+        $txnIdV2 = $txnIdV2 ?: ($txnId ?: Str::uuid()->toString());
+
+        // 1. Deduplicate strictly on txn_id_v2
+        $existingTx = GameTransaction::where('txn_id_v2', $txnIdV2)->first();
 
         if ($existingTx) {
             return response()->json([
@@ -165,7 +174,7 @@ class GgrGoldApiController extends Controller
                     return response()->json([
                         'status' => 0,
                         'user_balance' => $beforeBalance,
-                        'msg' => 'INSUFFICIENT_FUNDS',
+                        'msg' => 'INSUFFICIENT_USER_FUNDS',
                     ], 200);
                 }
 

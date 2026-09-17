@@ -6,7 +6,7 @@ export default function ResponsibleGaming() {
   return (
     <LegalLayout
       title="Responsible Social Gaming"
-      subtitle="Velox Play is dedicated to providing a safe, balanced, and enjoyable social gaming environment for all players."
+      subtitle="ZenithPlay is dedicated to providing a safe, balanced, and enjoyable social gaming environment for all players."
       activeTab="responsible-gaming"
     >
       <div className="bg-[#1A2C38] border border-[#213743] rounded-3xl p-6 sm:p-8 space-y-8 text-xs text-[#B1BAD3] leading-relaxed shadow-xl">

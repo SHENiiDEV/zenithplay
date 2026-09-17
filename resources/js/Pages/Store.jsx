@@ -123,7 +123,7 @@ export default function Store({ packages = [] }) {
 
   return (
     <MainLayout>
-      <Head title="Velox Coin Store & Packages" />
+      <Head title="ZenithPlay Coin Store & Packages" />
 
       <div className="max-w-6xl mx-auto space-y-10 pb-16">
         {/* Header Hero Banner */}

@@ -7,6 +7,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GgrGoldApiController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\StoreController;
 use App\Http\Middleware\AdminMiddleware;
@@ -44,7 +45,7 @@ Route::prefix('api')->group(function () {
     Route::get('/chat/messages', [ChatController::class, 'getMessages'])->name('api.chat.messages');
     Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('api.chat.send');
 
-    // Auth API
+    // Auth API & Web Forms
     Route::post('/auth/register', [AuthController::class, 'register'])->name('api.auth.register');
     Route::post('/auth/login', [AuthController::class, 'login'])->name('api.auth.login');
     Route::post('/auth/guest', [AuthController::class, 'guest'])->name('api.auth.guest');
@@ -56,8 +57,23 @@ Route::prefix('api')->group(function () {
         Route::post('/store/buy', [StoreController::class, 'buy'])->name('api.store.buy');
         Route::post('/bonus/daily', [BonusController::class, 'daily'])->name('api.bonus.daily');
         Route::post('/bonus/wheel', [BonusController::class, 'wheel'])->name('api.bonus.wheel');
+        Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('api.profile.update');
+        Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('api.profile.password');
     });
 });
+
+// Authenticated Player Dashboard & Profile
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/dashboard', [ProfileController::class, 'index'])->name('dashboard');
+});
+
+// Dedicated Web Auth Pages
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------

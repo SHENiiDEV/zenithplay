@@ -48,7 +48,7 @@ class PageController extends Controller
             [
                 'id' => 'first_deposit',
                 'title' => 'First Deposit Hero',
-                'description' => 'Make your first SC package purchase in the Velox Store',
+                'description' => 'Make your first SC package purchase in the ZenithPlay Store',
                 'reward' => '5.00 SC Bonus',
                 'icon' => 'Coins',
                 'completed' => count($storePurchases) > 0,

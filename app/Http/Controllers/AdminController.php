@@ -8,7 +8,6 @@ use App\Models\GameTransaction;
 use App\Models\User;
 use App\Services\NexusGgrService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -120,12 +119,14 @@ class AdminController extends Controller
             $user = User::findOrFail($request->user_id);
             $user->rtp = $rtp;
             $user->save();
+
             return response()->json([
                 'success' => true,
                 'message' => "User {$user->user_code} RTP set to {$rtp}%.",
             ]);
         } else {
             User::query()->update(['rtp' => $rtp]);
+
             return response()->json([
                 'success' => true,
                 'message' => "Global platform RTP set to {$rtp}%.",
@@ -144,11 +145,11 @@ class AdminController extends Controller
         ]);
 
         $user = User::findOrFail($request->user_id);
-        $user->is_banned = !$user->is_banned;
+        $user->is_banned = ! $user->is_banned;
 
         if ($user->is_banned) {
             $user->ban_reason = $request->input('reason', 'Security Policy Violation');
-            $user->ban_case_number = 'CASE_' . strtoupper(substr(bin2hex(random_bytes(3)), 0, 6));
+            $user->ban_case_number = 'CASE_'.strtoupper(substr(bin2hex(random_bytes(3)), 0, 6));
         } else {
             $user->ban_reason = null;
             $user->ban_case_number = null;
@@ -187,7 +188,7 @@ class AdminController extends Controller
                     ['game_code' => $gameCode],
                     [
                         'name' => $name,
-                        'slug' => str()->slug($name . '-' . $gameCode),
+                        'slug' => str()->slug($name.'-'.$gameCode),
                         'provider_code' => $providerCode,
                         'category' => strtolower($item['category'] ?? 'slots'),
                         'cover_image' => $item['banner'] ?? $item['cover_image'] ?? $item['image'] ?? $item['img'] ?? $item['icon'] ?? $item['url_thumb'] ?? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80',
@@ -202,7 +203,7 @@ class AdminController extends Controller
         }
 
         $deletedCount = 0;
-        if (!empty($syncedGameCodes) && !$provider) {
+        if (! empty($syncedGameCodes) && ! $provider) {
             $deletedCount = Game::whereNotIn('game_code', $syncedGameCodes)->delete();
         }
 

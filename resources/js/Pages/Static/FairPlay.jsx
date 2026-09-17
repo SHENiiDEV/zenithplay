@@ -6,7 +6,7 @@ export default function FairPlay() {
   return (
     <LegalLayout
       title="Provably Fair & Certified RNG"
-      subtitle="Cryptographic verification, server seed transparency, and certified high-RTP game mechanics at Velox Play."
+      subtitle="Cryptographic verification, server seed transparency, and certified high-RTP game mechanics at ZenithPlay."
       activeTab="fair-play"
     >
       <div className="bg-[#1A2C38] border border-[#213743] rounded-3xl p-6 sm:p-8 space-y-8 text-xs text-[#B1BAD3] leading-relaxed shadow-xl">

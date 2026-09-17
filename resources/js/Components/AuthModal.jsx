@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 import { X, Lock, Mail, User as UserIcon, Phone, Calendar, MapPin, Building, Globe, Hash, Zap, Sparkles, Key } from 'lucide-react';
-import ObsidianLogo from './ObsidianLogo';
+import ZenithLogo from './ZenithLogo';
 import { ALLOWED_COUNTRIES } from '../Utils/countries';
 
 export default function AuthModal({ isOpen, onClose, initialTab = 'login' }) {
@@ -87,7 +87,7 @@ export default function AuthModal({ isOpen, onClose, initialTab = 'login' }) {
         {/* Modal Header */}
         <div className="flex items-center justify-between p-5 border-b border-[#213743] bg-[#0F212E]/50">
           <div className="flex items-center gap-2">
-            <ObsidianLogo className="h-7" />
+            <ZenithLogo className="h-7" />
           </div>
           <button onClick={onClose} className="p-1.5 text-[#B1BAD3] hover:text-white rounded-lg hover:bg-[#213743]">
             <X className="w-5 h-5" />

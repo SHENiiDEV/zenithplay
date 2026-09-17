@@ -1,4 +1,4 @@
-Coin Purchase Receipt - Velox Play
+Coin Purchase Receipt - ZenithPlay
 
 Hello {{ $user->name }},
 
@@ -11,4 +11,6 @@ Updated Total SC Balance: {{ number_format($newBalance, 2) }} SC
 
 Return to Lobby: {{ url('/') }}
 
-© 2026 Velox Entertainment N.V. All rights reserved.
+© {{ date('Y') }} {{ config('app.company.name', 'ZenithPlay Social Gaming Ltd') }}. All rights reserved.
+Company Reg: {{ config('app.company.number') }} | {{ config('app.company.address') }}
+Contact: {{ config('app.company.email', 'info@zenithplay.co.uk') }}

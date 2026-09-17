@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reset Your Password - Velox Play</title>
+    <title>Reset Your Password - ZenithPlay</title>
     <style>
         body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #0F212E; color: #FFFFFF; margin: 0; padding: 20px; }
         .card { max-width: 550px; margin: 0 auto; background-color: #1A2C38; border: 1px solid #213743; border-radius: 16px; padding: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -20,7 +20,7 @@
     <div class="card">
         <div class="logo">
             <span class="badge">SECURITY RECOVERY</span>
-            <h1>VELOX PLAY</h1>
+            <h1 style="color: #00E700;">{{ config('app.company.name', config('app.name', 'ZPlay')) }}</h1>
         </div>
 
         <h2>Reset Your Password</h2>
@@ -33,7 +33,10 @@
         </div>
 
         <div class="footer">
-            &copy; 2026 Velox Entertainment N.V. All rights reserved. <br>
+            &copy; {{ date('Y') }} {{ config('app.company.name', 'ZPlay') }}. All rights reserved. <br>
+            @if(config('app.company.address'))
+                {{ config('app.company.address') }} <br>
+            @endif
             Direct link: {{ $resetUrl }}
         </div>
     </div>

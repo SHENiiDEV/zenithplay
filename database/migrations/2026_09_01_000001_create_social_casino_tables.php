@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
             $table->bigInteger('play_count')->default(0);
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
 

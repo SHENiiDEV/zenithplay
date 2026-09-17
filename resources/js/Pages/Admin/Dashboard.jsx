@@ -6,7 +6,7 @@ import { Users, Coins, RotateCw, TrendingUp, ShieldCheck, UserCheck, Lock } from
 export default function Dashboard({ stats = {}, recentUsers = [] }) {
   return (
     <MainLayout>
-      <Head title="Admin Dashboard - Obsidian Governance" />
+      <Head title="Admin Dashboard - ZenithPlay Governance" />
 
       <div className="space-y-6 max-w-6xl mx-auto pb-12">
         {/* Header Bar */}
@@ -14,7 +14,7 @@ export default function Dashboard({ stats = {}, recentUsers = [] }) {
           <div>
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-6 h-6 text-amber-400" />
-              <h1 className="text-2xl font-black text-white">Obsidian Administration & Governance</h1>
+              <h1 className="text-2xl font-black text-white">ZenithPlay Administration & Governance</h1>
             </div>
             <p className="text-xs text-[#B1BAD3] mt-0.5">
               Financial metrics, player RTP controls, and NexusGGR integration audit suite.

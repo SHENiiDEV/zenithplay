@@ -78,7 +78,7 @@ export default function Promotions({ promoPack }) {
 
   return (
     <MainLayout>
-      <Head title="Velox Promotions & Special Offers" />
+      <Head title="ZenithPlay Promotions & Special Offers" />
 
       <div className="max-w-6xl mx-auto space-y-8 pb-16">
         {/* Header */}

@@ -73,7 +73,7 @@ export default function StoreModal({ isOpen, onClose, user, onPurchaseSuccess })
             </div>
             <div>
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                Velox Coin Store
+                ZenithPlay Coin Store
                 <span className="px-2 py-0.5 text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-md">
                   Instant SC Delivery
                 </span>

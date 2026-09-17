@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePage, Link } from '@inertiajs/react';
 import { Send, Users, Sparkles, MessageSquare, Trophy, Crown, ChevronDown, X, Play } from 'lucide-react';
-import ObsidianEmblemSvg from './ObsidianEmblemSvg';
+import ZenithEmblemSvg from './ZenithEmblemSvg';
 
 export default function RightChatSidebar({ isOpen, onClose, liveWins = [] }) {
   const { auth } = usePage().props;
@@ -191,7 +191,7 @@ export default function RightChatSidebar({ isOpen, onClose, liveWins = [] }) {
               <div className="relative w-20 aspect-[4/3] rounded-lg overflow-hidden shrink-0 bg-[#0F212E]">
                 <img src={game.image} alt={game.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                 <div className="absolute top-1 left-1 w-4 h-4 rounded-full bg-[#0F212E] border border-cyan-500/40 p-0.5 flex items-center justify-center">
-                  <ObsidianEmblemSvg className="w-full h-full" />
+                  <ZenithEmblemSvg className="w-full h-full" />
                 </div>
               </div>
 

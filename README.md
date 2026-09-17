@@ -1,8 +1,8 @@
-# social-velox
+# zenithplay
 
-# ⚡ Velox Play - Next-Gen Provably Fair Social Gaming Platform
+# ⚡ ZenithPlay - Next-Gen Provably Fair Social Gaming Platform
 
-Velox Play is a Stake.com-style social gaming platform built with Laravel 12, Inertia.js, React 19, Tailwind CSS, and Nexus GGR Gold API.
+ZenithPlay is a Stake.com-style social gaming platform built with Laravel 12, Inertia.js, React 19, Tailwind CSS, and Nexus GGR Gold API.
 
 ## Features
 - **Stake.com UI/UX Replica:** Sleek dark mode design, modular left navigation, right live community chat, game cards with active player counters.

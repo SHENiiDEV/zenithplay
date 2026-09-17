@@ -57,11 +57,11 @@ class ChatController extends Controller
     public function sendMessage(Request $request): JsonResponse
     {
         $user = $request->user();
-        if (!$user) {
+        if (! $user) {
             $guestCode = User::generateUniqueUserCode(true);
             $user = User::create([
-                'name' => 'Guest_' . substr($guestCode, -4),
-                'email' => strtolower($guestCode) . '@obsidian-guest.local',
+                'name' => 'Guest_'.substr($guestCode, -4),
+                'email' => strtolower($guestCode).'@obsidian-guest.local',
                 'password' => Hash::make(str()->random(16)),
                 'user_code' => $guestCode,
                 'game_balance' => 250.00,
@@ -87,11 +87,11 @@ class ChatController extends Controller
         ]);
 
         // Launch background process for DeepSeek bot reply asynchronously (1ms non-blocking)
-        if (!$user->is_bot) {
+        if (! $user->is_bot) {
             $this->ensureBotProfilesExist();
             $artisanPath = base_path('artisan');
             $phpBinary = defined('PHP_BINARY') ? PHP_BINARY : '/opt/homebrew/opt/php@8.4/bin/php';
-            
+
             $cmd = sprintf('%s %s chat:reply %d > /dev/null 2>&1 &', escapeshellarg($phpBinary), escapeshellarg($artisanPath), $chatMsg->id);
             exec($cmd);
         }
@@ -127,7 +127,7 @@ class ChatController extends Controller
                 ['user_code' => $b['code']],
                 [
                     'name' => $b['name'],
-                    'email' => strtolower(str_replace(' ', '_', $b['name'])) . '@obsidian-bot.local',
+                    'email' => strtolower(str_replace(' ', '_', $b['name'])).'@obsidian-bot.local',
                     'password' => Hash::make(str()->random(16)),
                     'game_balance' => rand(2500, 15000) + (rand(0, 99) / 100),
                     'vip_level' => $b['vip'],

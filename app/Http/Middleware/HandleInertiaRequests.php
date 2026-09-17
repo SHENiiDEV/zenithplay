@@ -61,7 +61,7 @@ class HandleInertiaRequests extends Middleware
                     'ban_case_number' => $user->ban_case_number,
                 ] : null,
             ],
-            'appName' => config('app.name', 'Velox Play'),
+            'appName' => config('app.name', 'ZenithPlay'),
             'company' => config('app.company'),
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),

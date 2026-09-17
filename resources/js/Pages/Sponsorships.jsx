@@ -19,7 +19,7 @@ export default function Sponsorships() {
 
   return (
     <MainLayout>
-      <Head title="Velox Partnerships & PSP Payment Providers" />
+      <Head title="ZenithPlay Partnerships & PSP Payment Providers" />
 
       <div className="max-w-6xl mx-auto space-y-10 pb-16">
         {/* Header Hero Banner */}
@@ -30,7 +30,7 @@ export default function Sponsorships() {
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-white">Sponsorships & Payment Partners</h1>
           <p className="text-sm text-[#B1BAD3] max-w-2xl">
-            Velox Play collaborates with industry-leading payment service providers (PSP), gaming creators, and tier-1 casino software engines.
+            ZenithPlay collaborates with industry-leading payment service providers (PSP), gaming creators, and tier-1 casino software engines.
           </p>
         </div>
 

@@ -4,11 +4,11 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class DeepSeekAiService
 {
     protected string $apiKey;
+
     protected string $baseUrl;
 
     public function __construct()
@@ -58,22 +58,22 @@ RULES:
 
         // Ultra-fast transcript fallbacks (0ms)
         $shortFallbacks = [
-            "w start",
+            'w start',
             "omfg {$userName}",
             "gl @{$userName}",
-            "nice win",
-            "rip",
-            "fahh",
-            "ticket wasters lol",
-            "only vip wins here",
-            "jackpot!!",
-            "brutal sesh",
+            'nice win',
+            'rip',
+            'fahh',
+            'ticket wasters lol',
+            'only vip wins here',
+            'jackpot!!',
+            'brutal sesh',
             "dms @{$userName}",
-            "lol",
-            "gg",
-            "f",
-            "shitty sesh",
-            "looking good",
+            'lol',
+            'gg',
+            'f',
+            'shitty sesh',
+            'looking good',
         ];
 
         return $shortFallbacks[array_rand($shortFallbacks)];

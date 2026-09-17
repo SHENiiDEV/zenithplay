@@ -2,19 +2,25 @@
 
 @layer base {
   :root {
-    --bg-dark-base: #0F212E;
-    --bg-dark-card: #1A2C38;
-    --bg-dark-hover: #213743;
-    --brand-blue: #1475E1;
+    --bg-dark-base: #070B0F;
+    --bg-dark-card: #0A0C22;
+    --bg-dark-surface: #0F1233;
+    --bg-dark-hover: #151945;
     --brand-green: #00E700;
+    --brand-emerald: #14752A;
+    --brand-crimson: #CB1A32;
+    --brand-gold: #F59E0B;
+    --brand-burgundy: #1A0007;
     --text-primary: #FFFFFF;
-    --text-muted: #B1BAD3;
+    --text-muted: #8F9CAE;
+    --border-dark: #1E2248;
+    --border-glow-green: rgba(0, 231, 0, 0.4);
   }
 
   body {
     background-color: var(--bg-dark-base);
     color: var(--text-primary);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   }
 }
 
@@ -23,18 +29,56 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Custom scrollbars for Stake-style sleek UI */
+/* Custom scrollbars for ZenithPlay UI */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0F212E;
+  background: #070B0F;
 }
 ::-webkit-scrollbar-thumb {
-  background: #213743;
+  background: #14752A;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #557086;
+  background: #00E700;
 }
+
+/* Utility neon glows */
+.neon-glow-green {
+  box-shadow: 0 0 15px rgba(0, 231, 0, 0.4), inset 0 0 15px rgba(0, 231, 0, 0.1);
+}
+
+.neon-glow-gold {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+}
+
+.neon-glow-crimson {
+  box-shadow: 0 0 12px rgba(203, 26, 50, 0.4);
+}
+
+.neon-border-green {
+  border-color: #00E700;
+  box-shadow: 0 0 10px rgba(0, 231, 0, 0.3);
+}
+
+/* Card glass refraction */
+.zenith-card {
+  background-color: #0A0C22;
+  border: 1px solid #1E2248;
+}
+
+.zenith-card-surface {
+  background-color: #0F1233;
+  border: 1px solid #23285C;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

@@ -14,7 +14,7 @@ class BonusController extends Controller
     public function daily(Request $request): JsonResponse
     {
         $user = $request->user();
-        if (!$user) {
+        if (! $user) {
             return response()->json(['success' => false, 'message' => 'Unauthenticated'], 401);
         }
 
@@ -25,6 +25,7 @@ class BonusController extends Controller
 
         if ($lastClaim && $lastClaim->created_at->diffInHours(now()) < 24) {
             $hoursLeft = 24 - $lastClaim->created_at->diffInHours(now());
+
             return response()->json([
                 'success' => false,
                 'message' => "Daily bonus already claimed! Next claim available in {$hoursLeft} hours.",
@@ -57,7 +58,7 @@ class BonusController extends Controller
     public function wheel(Request $request): JsonResponse
     {
         $user = $request->user();
-        if (!$user) {
+        if (! $user) {
             return response()->json(['success' => false, 'message' => 'Unauthenticated'], 401);
         }
 

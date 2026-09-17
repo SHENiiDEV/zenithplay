@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -80,7 +79,7 @@ class User extends Authenticatable
         $prefix = $isGuest ? 'GUEST_' : 'RP_';
         do {
             $hex = strtoupper(substr(bin2hex(random_bytes(4)), 0, 7));
-            $code = $prefix . $hex;
+            $code = $prefix.$hex;
         } while (static::where('user_code', $code)->exists());
 
         return $code;

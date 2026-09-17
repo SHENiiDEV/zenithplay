@@ -27,25 +27,79 @@ class GameController extends Controller
     public function index(Request $request): Response
     {
         $category = strtolower($request->query('category', 'all'));
+        $provider = strtoupper($request->query('provider', 'all'));
         $search = $request->query('search');
 
         $query = Game::where('is_active', true);
 
+        if ($provider !== 'ALL' && ! empty($provider)) {
+            $query->where('provider_code', $provider);
+        }
+
         if ($category !== 'all') {
             if (in_array($category, ['slots', 'slot'])) {
-                $query->whereIn('category', ['Slots', 'slots', 'buy_feature', 'megaways', 'jackpots']);
+                $query->where(function ($q) {
+                    $q->whereIn('category', ['slots', 'Slots', 'buy_feature', 'megaways', 'jackpots'])
+                        ->orWhere('category', 'LIKE', '%slot%');
+                });
             } elseif (in_array($category, ['live', 'live casino', 'live_casino'])) {
                 $query->where(function ($q) {
-                    $q->where('category', 'Live Casino')
-                        ->orWhere('category', 'live')
-                        ->orWhere('category', 'LIKE', '%live%');
+                    $q->whereIn('category', ['live', 'Live Casino', 'live_casino'])
+                        ->orWhere('provider_code', 'PP_LIVE_PRO')
+                        ->orWhere('category', 'LIKE', '%live%')
+                        ->orWhere('name', 'LIKE', '%live%')
+                        ->orWhere('name', 'LIKE', '%roulette%')
+                        ->orWhere('name', 'LIKE', '%blackjack%')
+                        ->orWhere('name', 'LIKE', '%baccarat%');
                 });
-            } elseif (in_array($category, ['table', 'table games', 'table_games'])) {
-                $query->whereIn('category', ['Table Games', 'table', 'Roulette', 'Baccarat', 'Blackjack']);
-            } elseif (in_array($category, ['mini', 'mini games', 'mini_games', 'originals'])) {
+            } elseif (in_array($category, ['mini', 'mini games', 'mini_games', 'originals', 'crash'])) {
                 $query->where(function ($q) {
-                    $q->whereIn('category', ['Mini Games', 'mini', 'originals'])
-                        ->orWhere('category', 'LIKE', '%mini%');
+                    $q->whereIn('category', ['crash', 'Mini Games', 'mini', 'originals'])
+                        ->orWhere('provider_code', 'SPRIBE')
+                        ->orWhere('category', 'LIKE', '%mini%')
+                        ->orWhere('category', 'LIKE', '%crash%')
+                        ->orWhere('name', 'LIKE', '%aviator%')
+                        ->orWhere('name', 'LIKE', '%mines%')
+                        ->orWhere('name', 'LIKE', '%plinko%');
+                });
+            } elseif (in_array($category, ['fishing', 'fish'])) {
+                $query->where(function ($q) {
+                    $q->whereIn('category', ['fishing', 'fish'])
+                        ->orWhere('provider_code', 'FISHHUNTER')
+                        ->orWhere('category', 'LIKE', '%fish%')
+                        ->orWhere('name', 'LIKE', '%fish%')
+                        ->orWhere('name', 'LIKE', '%bass%');
+                });
+            } elseif (in_array($category, ['sports', 'sport', 'esports', 'esport'])) {
+                $query->where(function ($q) {
+                    $q->whereIn('category', ['sports', 'Sportsbook', 'esports'])
+                        ->orWhere('category', 'LIKE', '%sport%')
+                        ->orWhere('name', 'LIKE', '%football%')
+                        ->orWhere('name', 'LIKE', '%soccer%')
+                        ->orWhere('name', 'LIKE', '%basketball%')
+                        ->orWhere('name', 'LIKE', '%penalty%')
+                        ->orWhere('name', 'LIKE', '%goal%')
+                        ->orWhere('name', 'LIKE', '%champion%')
+                        ->orWhere('name', 'LIKE', '%cyber%')
+                        ->orWhere('name', 'LIKE', '%virtual%');
+                });
+            } elseif (in_array($category, ['card', 'cards', 'table', 'table games'])) {
+                $query->where(function ($q) {
+                    $q->whereIn('category', ['card', 'table', 'Table Games'])
+                        ->orWhere('name', 'LIKE', '%poker%')
+                        ->orWhere('name', 'LIKE', '%blackjack%')
+                        ->orWhere('name', 'LIKE', '%baccarat%')
+                        ->orWhere('name', 'LIKE', '%holdem%')
+                        ->orWhere('name', 'LIKE', '%card%');
+                });
+            } elseif (in_array($category, ['lottery', 'lotto'])) {
+                $query->where(function ($q) {
+                    $q->whereIn('category', ['lottery', 'lotto'])
+                        ->orWhere('name', 'LIKE', '%keno%')
+                        ->orWhere('name', 'LIKE', '%bingo%')
+                        ->orWhere('name', 'LIKE', '%scratch%')
+                        ->orWhere('name', 'LIKE', '%lotto%')
+                        ->orWhere('name', 'LIKE', '%fortune%');
                 });
             } else {
                 $query->where('category', 'LIKE', "%{$category}%");
@@ -56,19 +110,105 @@ class GameController extends Controller
             $query->where('name', 'like', "%{$search}%");
         }
 
-        $games = $query->orderBy('is_featured', 'desc')
-            ->orderBy('play_count', 'desc')
+        // Interleave games naturally with iconic hits first, and rich pseudo-random distribution
+        $orderRaw = "
+            CASE 
+                WHEN is_featured = 1 THEN 1
+                WHEN name IN ('Gates of Olympus 1000', 'Gates of Olympus', 'Sweet Bonanza 1000', 'Sweet Bonanza', 'Sugar Rush 1000', 'Sugar Rush', 'Big Bass Splash', 'Starlight Princess 1000', 'Wanted Dead or a Wild', 'Aviator', 'Mahjong Ways 2', 'The Dog House Megaways', 'Toshi Ways Club', 'Fortune Tiger', 'Rip City') THEN 2
+                WHEN name LIKE '%Olympus%' OR name LIKE '%Sweet Bonanza%' OR name LIKE '%Sugar Rush%' OR name LIKE '%Big Bass%' OR name LIKE '%Starlight%' OR name LIKE '%Fortune%' OR name LIKE '%Dragon%' THEN 3
+                ELSE 10
+            END ASC,
+            ((id * 109 + 37) % 2471) ASC
+        ";
+
+        $games = $query->orderByRaw($orderRaw)
             ->paginate(36)
             ->withQueryString();
 
         $featuredGames = Game::where('is_active', true)
             ->where('is_featured', true)
-            ->limit(6)
+            ->limit(12)
+            ->get();
+
+        if ($featuredGames->isEmpty()) {
+            $featuredGames = Game::where('is_active', true)
+                ->whereIn('provider_code', ['PRAGMATIC', 'PGSOFT', 'HACKSAW', 'SPRIBE'])
+                ->limit(12)
+                ->get();
+        }
+
+        $spribeGames = Game::where('is_active', true)
+            ->where('provider_code', 'SPRIBE')
+            ->limit(8)
+            ->get();
+
+        $pgSoftGames = Game::where('is_active', true)
+            ->where('provider_code', 'PGSOFT')
+            ->limit(8)
+            ->get();
+
+        $hacksawGames = Game::where('is_active', true)
+            ->where('provider_code', 'HACKSAW')
+            ->limit(8)
+            ->get();
+
+        $fishHunterGames = Game::where('is_active', true)
+            ->where('provider_code', 'FISHHUNTER')
+            ->limit(8)
+            ->get();
+
+        $liveGames = Game::where('is_active', true)
+            ->where(function ($q) {
+                $q->where('provider_code', 'PP_LIVE_PRO')
+                    ->orWhere('category', 'Live Casino')
+                    ->orWhere('category', 'live')
+                    ->orWhere('category', 'Roulette')
+                    ->orWhere('category', 'Baccarat')
+                    ->orWhere('category', 'Blackjack');
+            })
+            ->whereNotNull('cover_image')
+            ->where('cover_image', '!=', '')
+            ->limit(8)
             ->get();
 
         $liveWins = LiveCommunityWin::orderBy('created_at', 'desc')
             ->limit(12)
             ->get();
+
+        $availableProviders = Game::selectRaw('provider_code, count(*) as total')
+            ->where('is_active', true)
+            ->groupBy('provider_code')
+            ->orderBy('total', 'desc')
+            ->get()
+            ->map(function ($p) {
+                $names = [
+                    'PRAGMATIC' => 'Pragmatic Play',
+                    'PGSOFT' => 'PG Soft',
+                    'HACKSAW' => 'Hacksaw Gaming',
+                    'SPRIBE' => 'Spribe Originals',
+                    'EVOPLAY' => 'Evoplay',
+                    'REELKINGDOM' => 'Reel Kingdom',
+                    'BOOONGO' => 'Booongo',
+                    'HABANERO' => 'Habanero',
+                    'CQ9' => 'CQ9 Gaming',
+                    'AMUSNET' => 'Amusnet',
+                    'EGT' => 'EGT Digital',
+                    'RUBYPLAY' => 'Ruby Play',
+                    'FASTSPIN' => 'FastSpin',
+                    'SPADEGAMING' => 'Spadegaming',
+                    'NEXTSPIN' => 'NextSpin',
+                    'FACHAI' => 'Fa Chai',
+                    'FATPANDA' => 'Fat Panda',
+                    'FISHHUNTER' => 'Fish Hunter',
+                    'PP_LIVE_PRO' => 'Pragmatic Live',
+                ];
+
+                return [
+                    'code' => $p->provider_code,
+                    'name' => $names[$p->provider_code] ?? $p->provider_code,
+                    'count' => $p->total,
+                ];
+            });
 
         $userFavoriteIds = [];
         if ($request->user()) {
@@ -80,8 +220,15 @@ class GameController extends Controller
         return Inertia::render('Lobby', [
             'games' => $games,
             'featuredGames' => $featuredGames,
+            'spribeGames' => $spribeGames,
+            'pgSoftGames' => $pgSoftGames,
+            'hacksawGames' => $hacksawGames,
+            'fishHunterGames' => $fishHunterGames,
+            'liveGames' => $liveGames,
             'liveWins' => $liveWins,
             'currentCategory' => $category,
+            'currentProvider' => $provider,
+            'providers' => $availableProviders,
             'search' => $search,
             'userFavoriteIds' => $userFavoriteIds,
         ]);
@@ -97,11 +244,11 @@ class GameController extends Controller
         $user = $request->user();
 
         // If guest visits game player, automatically generate or obtain a guest session
-        if (!$user) {
+        if (! $user) {
             $guestCode = User::generateUniqueUserCode(true);
             $user = User::create([
-                'name' => 'Guest_' . substr($guestCode, -4),
-                'email' => strtolower($guestCode) . '@obsidian-guest.local',
+                'name' => 'Guest_'.substr($guestCode, -4),
+                'email' => strtolower($guestCode).'@obsidian-guest.local',
                 'password' => bcrypt(str()->random(16)),
                 'user_code' => $guestCode,
                 'game_balance' => 500.00, // Demo guest wallet balance
@@ -133,6 +280,7 @@ class GameController extends Controller
     public function mockFrame(string $slug)
     {
         $game = Game::where('slug', $slug)->firstOrFail();
+
         return redirect()->away("https://demogamesfree.pragmaticplay.net/gs2c/openGame.do?gameSymbol={$game->game_code}&lang=en&cur=SC");
     }
 
@@ -142,7 +290,7 @@ class GameController extends Controller
     public function getBalance(Request $request): JsonResponse
     {
         $user = $request->user();
-        if (!$user) {
+        if (! $user) {
             return response()->json(['game_balance' => 0.00, 'authenticated' => false]);
         }
 
@@ -164,7 +312,7 @@ class GameController extends Controller
     public function toggleFavorite(Request $request): JsonResponse
     {
         $user = $request->user();
-        if (!$user) {
+        if (! $user) {
             return response()->json(['success' => false, 'message' => 'Unauthenticated'], 401);
         }
 
@@ -175,9 +323,11 @@ class GameController extends Controller
 
         if ($existing) {
             $existing->delete();
+
             return response()->json(['success' => true, 'favorited' => false]);
         } else {
             UserFavorite::create(['user_id' => $user->id, 'game_id' => $gameId]);
+
             return response()->json(['success' => true, 'favorited' => true]);
         }
     }

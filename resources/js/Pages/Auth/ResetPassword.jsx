@@ -1,7 +1,7 @@
 import React from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import MainLayout from '../../Layouts/MainLayout';
-import ObsidianLogo from '../../Components/ObsidianLogo';
+import ZenithLogo from '../../Components/ZenithLogo';
 import { Lock, Mail, Key, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function ResetPassword({ token, email }) {
@@ -19,12 +19,12 @@ export default function ResetPassword({ token, email }) {
 
   return (
     <MainLayout>
-      <Head title="Reset Password - Obsidian Social Casino" />
+      <Head title="Reset Password - ZenithPlay Social Casino" />
 
       <div className="max-w-md mx-auto py-12 px-4">
         <div className="bg-[#1A2C38] border border-[#213743] rounded-3xl p-8 shadow-2xl space-y-6">
           <div className="text-center space-y-2">
-            <ObsidianLogo className="h-10 mx-auto" />
+            <ZenithLogo className="h-10 mx-auto" />
             <h1 className="text-2xl font-black text-white tracking-tight">Reset Password</h1>
             <p className="text-xs text-[#B1BAD3]">Enter your new password to restore account access.</p>
           </div>

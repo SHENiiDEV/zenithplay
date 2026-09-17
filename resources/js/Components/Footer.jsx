@@ -1,257 +1,168 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { 
-  ShieldCheck, 
-  Gamepad2, 
-  Gift, 
-  Coins, 
-  Crown, 
-  BookOpen, 
-  Award, 
-  Headphones, 
-  Lock, 
-  CheckCircle2, 
-  Building2, 
-  Mail, 
-  Flame, 
-  Sparkles,
-  HeartHandshake
-} from 'lucide-react';
-import ObsidianLogo from './ObsidianLogo';
+import ZenithLogo from './ZenithLogo';
 
 export default function Footer() {
   const { company } = usePage().props;
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
 
-  const gameLinks = [
-    { name: 'Casino Lobby', href: '/' },
-    { name: 'Certified Slots', href: '/?category=slots' },
-    { name: 'Live Casino', href: '/?category=live' },
-    { name: 'Table Games', href: '/?category=table' },
-    { name: 'Mini Games & Originals', href: '/?category=mini' },
-    { name: 'Official Coin Store', href: '/store' },
-  ];
-
-  const rewardLinks = [
-    { name: 'Promotions & Boosters', href: '/promotions' },
-    { name: 'Player Challenges', href: '/challenges' },
-    { name: 'VIP Club & XP Rewards', href: '/vip-club' },
-    { name: 'Affiliate Program', href: '/affiliate' },
-    { name: 'News & Official Blog', href: '/blog' },
-    { name: 'Esports & Partnerships', href: '/sponsorships' },
-  ];
-
-  const legalLinks = [
-    { name: 'Terms of Service', href: '/terms' },
-    { name: 'Privacy Policy (GDPR)', href: '/privacy' },
-    { name: 'Responsible Gaming', href: '/responsible-gaming' },
-    { name: 'Provably Fair & RNG', href: '/fair-play' },
-    { name: 'KYC & AML Compliance', href: '/kyc-aml' },
-  ];
-
-  const supportLinks = [
-    { name: 'Player Help & Support', href: '/support' },
-    { name: 'Instant SC Delivery', href: '/store' },
-    { name: 'Payment Gateways', href: '/sponsorships' },
-    { name: 'Account Security & 2FA', href: '/support' },
-  ];
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (newsletterEmail.trim()) {
+      setSubscribed(true);
+      setNewsletterEmail('');
+      setTimeout(() => setSubscribed(false), 4000);
+    }
+  };
 
   return (
-    <footer className="mt-16 border-t border-[#213743] bg-[#0A1620] text-[#B1BAD3] pt-12 pb-16 lg:pb-12 text-xs rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Top Header Row: Brand Info + Payment & Security Logos */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-10 border-b border-[#213743]">
-          <div className="space-y-3 max-w-md">
+    <footer className="mt-16 border-t border-[#1E2248] bg-[#070B0F] text-[#8F9CAE] pt-12 pb-16 lg:pb-12 text-xs rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl space-y-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        
+        {/* Main Footer Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          {/* Brand & Tagline */}
+          <div className="lg:col-span-2 space-y-3.5">
             <Link href="/" className="inline-block">
-              <ObsidianLogo className="h-10 sm:h-12 w-auto" />
+              <ZenithLogo className="h-9 w-auto" />
             </Link>
-            <p className="text-xs text-[#8A99AD] leading-relaxed">
-              Velox Play is the next-generation online social gaming platform delivering tier-1 certified slots, live tables, and instant SC store packages with provably fair entertainment.
+            <p className="text-xs text-[#8F9CAE] leading-relaxed max-w-sm">
+              {company?.name || 'ZPlay'} is the next-generation social gaming platform offering certified slots, live tables, crash originals, and instant SC store packages with provably fair entertainment.
             </p>
-          </div>
-
-          {/* Payment Badges & Trust Logos */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 lg:gap-6 bg-[#1A2C38]/60 border border-[#213743] p-4 sm:p-5 rounded-2xl">
-            <div className="text-left sm:text-right">
-              <span className="text-[10px] font-black uppercase tracking-wider text-[#557086] block">
-                Official Payment Gateways
+            
+            {/* Badges */}
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <span className="px-2.5 py-1 rounded-lg bg-[#CB1A32]/20 border border-[#CB1A32]/40 text-[#CB1A32] font-black text-xs">
+                18+ Only
               </span>
-              <span className="text-xs font-bold text-white">
-                256-Bit SSL Encrypted
+              <span className="px-2.5 py-1 rounded-lg bg-[#00E700]/10 border border-[#00E700]/30 text-[#00E700] font-bold text-xs">
+                Provably Fair
+              </span>
+              <span className="px-2.5 py-1 rounded-lg bg-[#0F1233] border border-[#1E2248] text-white font-bold text-xs">
+                256-bit SSL
               </span>
             </div>
 
-            <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
-              {/* Visa Logo Badge */}
-              <div className="h-9 sm:h-10 px-3 bg-white rounded-xl flex items-center justify-center shadow-md hover:scale-105 transition-transform">
-                <img 
-                  src="/images/visa.png" 
-                  alt="Visa Gateway" 
-                  className="h-5 sm:h-6 w-auto object-contain" 
-                  loading="lazy"
+            {/* Payment & Security Logos */}
+            <div className="flex items-center gap-2.5 pt-2">
+              <div className="h-9 px-3 bg-[#0A0C22] border border-[#1E2248] hover:border-[#1475E1]/60 rounded-xl flex items-center justify-center shadow-sm transition-all">
+                <img
+                  src="/images/payments/visa.png"
+                  alt="VISA"
+                  className="h-4.5 w-auto object-contain brightness-110"
                 />
               </div>
 
-              {/* Mastercard Logo Badge */}
-              <div className="h-9 sm:h-10 px-3 bg-white rounded-xl flex items-center justify-center shadow-md hover:scale-105 transition-transform">
-                <img 
-                  src="/images/mastercard.png" 
-                  alt="Mastercard Gateway" 
-                  className="h-5 sm:h-6 w-auto object-contain" 
-                  loading="lazy"
+              <div className="h-9 px-3 bg-[#0A0C22] border border-[#1E2248] hover:border-red-500/60 rounded-xl flex items-center justify-center shadow-sm transition-all">
+                <img
+                  src="/images/payments/mastercard.png"
+                  alt="Mastercard"
+                  className="h-5.5 w-auto object-contain brightness-110"
                 />
               </div>
 
-              {/* PCI DSS Compliant Logo Badge */}
-              <div className="h-9 sm:h-10 px-3 bg-[#0F212E] border border-cyan-500/30 rounded-xl flex items-center justify-center shadow-md hover:scale-105 transition-transform">
-                <img 
-                  src="/images/pci-dss.png" 
-                  alt="PCI DSS Compliant" 
-                  className="h-6 sm:h-7 w-auto object-contain" 
-                  loading="lazy"
+              <div className="h-9 px-3 bg-[#0A0C22] border border-[#1E2248] hover:border-teal-400/60 rounded-xl flex items-center justify-center shadow-sm transition-all">
+                <img
+                  src="/images/payments/pci-dss.png"
+                  alt="PCI DSS Compliant"
+                  className="h-5.5 w-auto object-contain"
                 />
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Links Navigation Grid (4 Columns) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Column 1: Games & Lobby */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-              <Flame className="w-4 h-4 text-amber-500" />
-              <span>Games & Lobby</span>
-            </h4>
-            <ul className="space-y-2.5">
-              {gameLinks.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href}
-                    className="text-[#8A99AD] hover:text-white hover:underline transition-colors block text-xs"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+          {/* About Us Column */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-black text-white uppercase tracking-wider">About Us</h4>
+            <ul className="space-y-2">
+              <li><Link href="/" className="hover:text-white transition-colors">About {company?.name || 'ZPlay'}</Link></li>
+              <li><Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
+              <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/affiliate" className="hover:text-white transition-colors">Affiliate Program</Link></li>
             </ul>
           </div>
 
-          {/* Column 2: Rewards & Community */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-              <Crown className="w-4 h-4 text-[#1475E1]" />
-              <span>Rewards & VIP</span>
-            </h4>
-            <ul className="space-y-2.5">
-              {rewardLinks.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href}
-                    className="text-[#8A99AD] hover:text-white hover:underline transition-colors block text-xs"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+          {/* Support Column */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-black text-white uppercase tracking-wider">Support</h4>
+            <ul className="space-y-2">
+              <li><Link href="/support" className="hover:text-white transition-colors">Help Center</Link></li>
+              <li><Link href="/support" className="hover:text-white transition-colors">Contact Us</Link></li>
+              <li><Link href="/responsible-gaming" className="hover:text-white transition-colors">Responsible Gaming</Link></li>
+              <li><Link href="/fair-play" className="hover:text-white transition-colors">Fair Play & RNG</Link></li>
             </ul>
           </div>
 
-          {/* Column 3: Legal & Compliance */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Legal & Policies</span>
-            </h4>
-            <ul className="space-y-2.5">
-              {legalLinks.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href}
-                    className="text-[#8A99AD] hover:text-white hover:underline transition-colors block text-xs"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Help & Player Support */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-              <Headphones className="w-4 h-4 text-cyan-400" />
-              <span>Help & Assistance</span>
-            </h4>
-            <ul className="space-y-2.5">
-              {supportLinks.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href}
-                    className="text-[#8A99AD] hover:text-white hover:underline transition-colors block text-xs"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <a 
-                  href={`mailto:${company?.email || 'support@velox-play.com'}`}
-                  className="text-cyan-400 hover:text-cyan-300 hover:underline transition-colors flex items-center gap-1.5 text-xs font-mono font-bold"
+          {/* Subscribe to Newsletter */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-black text-white uppercase tracking-wider">Subscribe to Newsletter</h4>
+            <p className="text-[11px] text-[#8F9CAE]">
+              Get exclusive VIP promos & latest games directly to your inbox.
+            </p>
+            {subscribed ? (
+              <div className="p-2.5 bg-[#00E700]/20 border border-[#00E700] rounded-xl text-center text-[#00E700] font-bold text-xs">
+                Thank you for subscribing!
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="space-y-2">
+                <input
+                  type="email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  className="w-full px-3 py-2 bg-[#0A0C22] border border-[#1E2248] focus:border-[#00E700] rounded-xl text-xs text-white placeholder-[#555E75] outline-none"
+                />
+                <button
+                  type="submit"
+                  className="w-full py-2 bg-gradient-to-r from-[#14752A] to-[#00E700] hover:brightness-110 text-black font-black text-xs rounded-xl shadow-[0_0_10px_rgba(0,231,0,0.3)] transition-all hover:scale-[1.02] active:scale-95"
                 >
-                  <Mail className="w-3.5 h-3.5 shrink-0" />
-                  <span className="truncate">{company?.email || 'support@velox-play.com'}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Responsible Gaming & 18+ Regulatory Banner */}
-        <div className="bg-[#1A2C38] border border-[#213743] p-5 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 font-black text-lg flex items-center justify-center shrink-0">
-              18+
-            </div>
-            <div className="space-y-1">
-              <h5 className="font-bold text-white text-xs flex items-center gap-2">
-                <HeartHandshake className="w-4 h-4 text-red-400" />
-                <span>Strict 18+ Responsible Social Gaming Disclaimer</span>
-              </h5>
-              <p className="text-[11px] text-[#8A99AD] leading-relaxed">
-                Velox Play is strictly intended for individuals aged 18 and older for social entertainment purposes only. No real money gambling is offered. Social Coins (SC) have no cash value and cannot be redeemed for real money.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            <Link
-              href="/responsible-gaming"
-              className="px-3.5 py-1.5 bg-[#213743] hover:bg-[#2c4757] text-white font-bold text-xs rounded-xl border border-white/10 transition-colors"
-            >
-              Responsible Gaming Policy
-            </Link>
-          </div>
-        </div>
-
-        {/* Bottom Bar: Company Registration & Copyright Notice */}
-        <div className="pt-8 border-t border-[#213743] flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-[#557086]">
-          <div className="flex items-center gap-2 text-center md:text-left flex-wrap">
-            <Building2 className="w-3.5 h-3.5 text-[#1475E1] shrink-0" />
-            <span className="text-white font-bold">{company?.name || 'Velox Entertainment N.V.'}</span>
-            <span>•</span>
-            <span>{company?.address || 'Heinekenstraat 44, Willemstad, Curaçao'}</span>
-            {company?.reg_number && (
-              <>
-                <span>•</span>
-                <span className="font-mono">Reg No: {company.reg_number}</span>
-              </>
+                  Subscribe
+                </button>
+              </form>
             )}
           </div>
+        </div>
 
-          <div className="text-center md:text-right">
-            <p>© {new Date().getFullYear()} Velox Play. All rights reserved.</p>
+        {/* Legal Entity & Licensing Footer Disclosure */}
+        <div className="pt-6 border-t border-[#1E2248] text-xs">
+          <div className="bg-[#0A0C22] border border-[#1E2248] rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <p className="font-bold text-white text-xs sm:text-sm flex items-center gap-2">
+                <span>{company?.name || 'ZenithPlay Social Gaming Ltd'}</span>
+                <span className="px-2 py-0.5 text-[10px] font-mono bg-[#00E700]/10 text-[#00E700] border border-[#00E700]/30 rounded">
+                  REG: {company?.number || '164892'}
+                </span>
+              </p>
+              <p className="text-[11px] text-[#8F9CAE]">
+                <span>Registered Address: {company?.address || 'Heinekenstraat 44, Willemstad, Curaçao'}</span>
+              </p>
+            </div>
+            <div className="flex items-center gap-2 text-xs shrink-0">
+              <span className="text-[#555E75]">Official Inquiries:</span>
+              <a
+                href={`mailto:${company?.email || 'info@zenithplay.co.uk'}`}
+                className="text-[#00E700] hover:underline font-mono font-bold"
+              >
+                {company?.email || 'info@zenithplay.co.uk'}
+              </a>
+            </div>
           </div>
         </div>
+
+        {/* Bottom Bar: Copyright & Compliance */}
+        <div className="pt-2 border-t border-[#1E2248] flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-[#555E75]">
+          <div>
+            © {new Date().getFullYear()} {company?.name || 'ZenithPlay Social Gaming Ltd'}. All rights reserved. Free-to-play social gaming entertainment.
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/responsible-gaming" className="hover:text-white transition-colors">18+ Play Responsibly</Link>
+          </div>
+        </div>
+
       </div>
     </footer>
   );

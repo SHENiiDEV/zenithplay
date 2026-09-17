@@ -13,15 +13,15 @@ export default function Blog() {
   const posts = [
     {
       id: 1,
-      title: 'Welcome to Velox Play: The Next-Gen Social Gaming Experience',
+      title: 'Welcome to ZenithPlay: The Next-Gen Social Gaming Experience',
       category: 'ANNOUNCEMENTS',
       date: 'Sep 8, 2026',
       readTime: '3 min read',
-      author: 'Velox Team',
+      author: 'ZenithPlay Team',
       featured: true,
       imageBg: 'from-blue-600/30 to-purple-600/20',
       excerpt: 'Discover our new VIP progression system, instant SC deposits, and 150+ top games from Pragmatic Play, Hacksaw, and NetEnt.',
-      content: `Welcome to Velox Play! We are thrilled to launch the premier social gaming platform built for speed, transparency, and top-tier entertainment.
+      content: `Welcome to ZenithPlay! We are thrilled to launch the premier social gaming platform built for speed, transparency, and top-tier entertainment.
 
 ### Key Platform Features:
 - **Instant SC Delivery**: Every store package or custom EUR deposit grants immediate Social Coins (SC) straight to your balance.
@@ -33,14 +33,14 @@ Stay tuned for weekly raffle announcements, daily wheel multiplier drops, and sp
     },
     {
       id: 2,
-      title: 'How Social Coins (SC) and VIP XP Work in Velox Play',
+      title: 'How Social Coins (SC) and VIP XP Work in ZenithPlay',
       category: 'GUIDES',
       date: 'Sep 5, 2026',
       readTime: '5 min read',
       author: 'Game Master',
       featured: false,
       excerpt: 'Learn how to maximize your SC deposit bonus tiers up to +30% and level up your account to VIP Level 10.',
-      content: `Understanding the Velox Play economy is simple and rewarding.
+      content: `Understanding the ZenithPlay economy is simple and rewarding.
 
 ### SC Bonus Tiers:
 - **€5 - €49.99**: +5% SC Bonus
@@ -62,7 +62,7 @@ Standard deposits earn 1 VIP XP per €1 spent. Keep an eye on the Promotions pa
       author: 'Events Desk',
       featured: false,
       excerpt: 'Spin the wheel every 24 hours for guaranteed SC rewards and collect automatic raffle tickets with every deposit.',
-      content: `Every player on Velox Play is eligible for daily rewards and weekly prizes.
+      content: `Every player on ZenithPlay is eligible for daily rewards and weekly prizes.
 
 ### Daily Wheel of Fortune:
 Spin the wheel once every 24 hours to claim free SC coins. Higher VIP levels receive multiplier boosts on all wheel rewards!
@@ -79,7 +79,7 @@ For every €10 deposited in the store, 1 raffle ticket is automatically credite
       author: 'VIP Host Manager',
       featured: false,
       excerpt: 'A complete deep dive into VIP Tiers 1 through 10, cashback rewards, level-up gifts, and dedicated account management.',
-      content: `Reaching VIP status on Velox Play unlocks exclusive privileges designed for dedicated players.
+      content: `Reaching VIP status on ZenithPlay unlocks exclusive privileges designed for dedicated players.
 
 ### Perks Breakdown:
 - **Bronze (Level 1-2)**: Daily Wheel unlocked + Weekly Cashback.
@@ -101,7 +101,7 @@ For every €10 deposited in the store, 1 raffle ticket is automatically credite
 
   return (
     <MainLayout>
-      <Head title="Velox Play Official Blog & News Hub" />
+      <Head title="ZenithPlay Official Blog & News Hub" />
 
       <div className="max-w-6xl mx-auto space-y-10 pb-16">
         {/* Header Hero Banner */}

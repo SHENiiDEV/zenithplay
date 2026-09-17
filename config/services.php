@@ -36,16 +36,16 @@ return [
     ],
 
     'nexus' => [
-        'base_url' => env('GGR_API_SERVER', env('NEXUS_BASE_URL', 'https://api.nexusggr.dev')),
-        'agent_code' => env('GGR_AGENT_CODE', env('NEXUS_AGENT_CODE', 'velox')),
+        'base_url' => env('GGR_API_SERVER', env('NEXUS_BASE_URL', 'https://api.nexusggr.eu')),
+        'agent_code' => env('GGR_AGENT_CODE', env('NEXUS_AGENT_CODE', 'zenithplay')),
         'agent_token' => env('GGR_AGENT_TOKEN', env('NEXUS_AGENT_TOKEN', '')),
         'agent_secret' => env('GGR_AGENT_SECRET', env('NEXUS_AGENT_SECRET', '')),
         'mock_mode' => env('GGR_MOCK_MODE', false),
     ],
 
     'nexus_ggr' => [
-        'server' => env('GGR_API_SERVER', 'https://api.nexusggr.dev'),
-        'agent_code' => env('GGR_AGENT_CODE', 'velox'),
+        'server' => env('GGR_API_SERVER', 'https://api.nexusggr.eu'),
+        'agent_code' => env('GGR_AGENT_CODE', 'zenithplay'),
         'agent_token' => env('GGR_AGENT_TOKEN', ''),
         'agent_secret' => env('GGR_AGENT_SECRET', ''),
         'mock_mode' => env('GGR_MOCK_MODE', false),

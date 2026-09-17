@@ -6,7 +6,7 @@ export default function Privacy() {
   return (
     <LegalLayout
       title="Privacy Policy & Data Governance"
-      subtitle="How Velox Play collects, encrypts, processes, and protects player personal data in compliance with GDPR and CCPA standards."
+      subtitle="How ZenithPlay collects, encrypts, processes, and protects player personal data in compliance with GDPR and CCPA standards."
       activeTab="privacy"
     >
       <div className="bg-[#1A2C38] border border-[#213743] rounded-3xl p-6 sm:p-8 space-y-8 text-xs text-[#B1BAD3] leading-relaxed shadow-xl">

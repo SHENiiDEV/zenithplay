@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Game;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -33,7 +34,7 @@ class StoreAndPagesTest extends TestCase
 
     public function test_lobby_category_filter_returns_correct_games(): void
     {
-        \App\Models\Game::create([
+        Game::create([
             'provider_id' => 1,
             'provider_code' => 'PRAGMATIC',
             'provider_name' => 'Pragmatic Play',
@@ -45,7 +46,7 @@ class StoreAndPagesTest extends TestCase
             'is_active' => true,
         ]);
 
-        \App\Models\Game::create([
+        Game::create([
             'provider_id' => 1,
             'provider_code' => 'EVOLUTION',
             'provider_name' => 'Evolution',

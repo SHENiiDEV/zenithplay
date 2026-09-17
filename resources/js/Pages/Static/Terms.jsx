@@ -6,7 +6,7 @@ export default function Terms() {
   return (
     <LegalLayout
       title="Terms of Service"
-      subtitle="Complete contractual agreement, virtual coin mechanics, and player eligibility guidelines for Velox Play."
+      subtitle="Complete contractual agreement, virtual coin mechanics, and player eligibility guidelines for ZenithPlay."
       activeTab="terms"
     >
       <div className="bg-[#1A2C38] border border-[#213743] rounded-3xl p-6 sm:p-8 space-y-8 text-xs text-[#B1BAD3] leading-relaxed shadow-xl">
@@ -16,7 +16,7 @@ export default function Terms() {
           <div>
             <h4 className="font-bold text-xs">FREE SOCIAL GAMING NOTICE</h4>
             <p className="text-[11px] text-[#B1BAD3] mt-1">
-              Velox Play operates as a free-to-play sweepstakes entertainment platform. Standard Coins (SC) are virtual social tokens designed exclusively for entertainment inside our platform and hold no real-world monetary redemption value.
+              ZenithPlay operates as a free-to-play sweepstakes entertainment platform. Standard Coins (SC) are virtual social tokens designed exclusively for entertainment inside our platform and hold no real-world monetary redemption value.
             </p>
           </div>
         </div>
@@ -28,7 +28,7 @@ export default function Terms() {
             <span>Virtual Coin Mechanics & Social Tokens</span>
           </h2>
           <p>
-            Standard Coins (SC) are non-transferable virtual tokens granted to registered users for free through daily bonuses, promotional events, or optional coin package purchases inside our store. SC cannot be bought, sold, traded, or redeemed for fiat currency or physical assets outside of the Velox Play ecosystem.
+            Standard Coins (SC) are non-transferable virtual tokens granted to registered users for free through daily bonuses, promotional events, or optional coin package purchases inside our store. SC cannot be bought, sold, traded, or redeemed for fiat currency or physical assets outside of the ZenithPlay ecosystem.
           </p>
         </section>
 
@@ -92,7 +92,7 @@ export default function Terms() {
             <span>Limitation of Liability</span>
           </h2>
           <p>
-            Velox Play is provided on an "AS IS" and "AS AVAILABLE" basis. We make no warranties regarding uninterrupted platform availability, latency, or server downtime. To the maximum extent permitted by law, Velox Entertainment N.V. shall not be liable for indirect or consequential damages.
+            ZenithPlay is provided on an "AS IS" and "AS AVAILABLE" basis. We make no warranties regarding uninterrupted platform availability, latency, or server downtime. To the maximum extent permitted by law, ZenithPlay Entertainment N.V. shall not be liable for indirect or consequential damages.
           </p>
         </section>
       </div>

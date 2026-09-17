@@ -112,7 +112,7 @@ export default function Users({ users = {}, search = '' }) {
 
   return (
     <MainLayout>
-      <Head title="Users & RTP Governance - Obsidian Admin" />
+      <Head title="Users & RTP Governance - ZenithPlay Admin" />
 
       <div className="space-y-6 max-w-6xl mx-auto pb-12">
         {/* Header Bar */}

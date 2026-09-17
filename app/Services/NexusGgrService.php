@@ -21,8 +21,8 @@ class NexusGgrService
 
     public function __construct()
     {
-        $this->apiServer = rtrim(config('services.nexus_ggr.server', env('GGR_API_SERVER', 'https://api.nexusggr.dev')), '/');
-        $this->agentCode = config('services.nexus_ggr.agent_code', env('GGR_AGENT_CODE', 'velox'));
+        $this->apiServer = rtrim(config('services.nexus_ggr.server', env('GGR_API_SERVER', 'https://api.nexusggr.eu')), '/');
+        $this->agentCode = config('services.nexus_ggr.agent_code', env('GGR_AGENT_CODE', 'zenithplay'));
         $this->agentToken = config('services.nexus_ggr.agent_token', env('GGR_AGENT_TOKEN', ''));
         $this->agentSecret = config('services.nexus_ggr.agent_secret', env('GGR_AGENT_SECRET', ''));
         $this->mockMode = (bool) config('services.nexus_ggr.mock_mode', env('GGR_MOCK_MODE', false));
@@ -37,19 +37,19 @@ class NexusGgrService
         $agentToken = $payload['agent_token'] ?? null;
         $agentSecret = $payload['agent_secret'] ?? null;
 
-        $validCodes = array_unique(array_filter([$this->agentCode, 'velox', 'royalplay', 'crowdplay']));
+        $validCodes = array_unique(array_filter([$this->agentCode, 'zenithplay']));
         $validTokens = array_unique(array_filter([$this->agentToken]));
         $validSecrets = array_unique(array_filter([$this->agentSecret]));
 
-        if ($agentCode && ! in_array($agentCode, $validCodes, true)) {
+        if ($agentCode && ! empty($validCodes) && ! in_array($agentCode, $validCodes, true)) {
             return false;
         }
 
-        if ($agentToken && ! in_array($agentToken, $validTokens, true)) {
+        if ($agentToken && ! empty($validTokens) && ! in_array($agentToken, $validTokens, true)) {
             return false;
         }
 
-        if ($agentSecret && ! in_array($agentSecret, $validSecrets, true)) {
+        if ($agentSecret && ! empty($validSecrets) && ! in_array($agentSecret, $validSecrets, true)) {
             return false;
         }
 
@@ -252,7 +252,7 @@ class NexusGgrService
                 return $rawBanner;
             }
             if (str_starts_with($rawBanner, '/')) {
-                return 'https://api.nexusggr.dev'.$rawBanner;
+                return 'https://api.nexusggr.eu'.$rawBanner;
             }
         }
 
@@ -270,17 +270,17 @@ class NexusGgrService
 
         // Pragmatic Play / Reel Kingdom / Fat Panda
         if (in_array($providerCode, ['PRAGMATIC', 'REELKINGDOM', 'FATPANDA', 'PP_LIVE_PRO', 'PRAGMATICLIVE'], true)) {
-            return "https://images.pragmaticplay.net/{$gameCodeLower}/{$gameCodeLower}_top_banner.jpg";
+            return "https://assets.bd34fgabh.com/apps/game-assets/{$gameCodeLower}/{$gameCodeLower}_800x600_NB.avif";
         }
 
         // PG Soft
         if ($providerCode === 'PGSOFT') {
-            return "https://m.pgsoft-games.com/games/{$gameCodeLower}/banner.png";
+            return "https://assets.bd34fgabh.com/img/pgsoft/{$gameCodeLower}.jpg";
         }
 
         // Hacksaw Gaming
         if ($providerCode === 'HACKSAW') {
-            return "https://static.hacksawgaming.com/games/{$gameCodeLower}/banner.png";
+            return "https://www-live.hacksawgaming.com/casino_thumbnails/{$gameCodeRaw}.jpg";
         }
 
         // Nolimit City
@@ -296,34 +296,34 @@ class NexusGgrService
         // Spribe
         if ($providerCode === 'SPRIBE') {
             if (str_contains($gameCodeLower, 'aviator')) {
-                return 'https://spribe.co/assets/games/aviator.png';
+                return 'https://spribe.co/assets/images/games/Av@2x.png?v=2.5.56';
             }
             if (str_contains($gameCodeLower, 'plinko')) {
-                return 'https://spribe.co/assets/games/plinko.png';
+                return 'https://spribe.co/assets/images/games/Pl@2x.png?v=2.5.56';
             }
             if (str_contains($gameCodeLower, 'mines')) {
-                return 'https://spribe.co/assets/games/mines.png';
+                return 'https://spribe.co/assets/images/games/Mi@2x.png?v=2.5.56';
             }
             if (str_contains($gameCodeLower, 'dice')) {
-                return 'https://spribe.co/assets/games/dice.png';
+                return 'https://spribe.co/assets/images/games/Di@2x.png?v=2.5.56';
             }
             if (str_contains($gameCodeLower, 'goal')) {
-                return 'https://spribe.co/assets/games/goal.png';
+                return 'https://spribe.co/assets/images/games/Go@2x.png?v=2.5.56';
             }
             if (str_contains($gameCodeLower, 'keno')) {
-                return 'https://spribe.co/assets/games/keno.png';
+                return 'https://spribe.co/assets/images/games/Ke@2x.png?v=2.5.56';
             }
             if (str_contains($gameCodeLower, 'hotline')) {
-                return 'https://spribe.co/assets/games/hotline.png';
+                return 'https://spribe.co/assets/images/games/Ho@2x.png?v=2.5.56';
             }
             if (str_contains($gameCodeLower, 'hilo')) {
-                return 'https://spribe.co/assets/games/hilo.png';
+                return 'https://spribe.co/assets/images/games/Hi@2x.png?v=2.5.56';
             }
         }
 
         // Evoplay
         if ($providerCode === 'EVOPLAY') {
-            return "https://evoplay.games/wp-content/uploads/games/{$gameCodeLower}/cover.png";
+            return "https://resource.fdsigaming.com/thumbnail/slot/evoplay/{$gameCodeRaw}_Thumbnail_360x360.png";
         }
 
         // Playson
@@ -337,7 +337,7 @@ class NexusGgrService
         }
 
         // Default Nexus GGR Aggregator CDN fallback
-        return "https://cdn.nexusggr.dev/banners/{$providerCode}/{$gameCodeRaw}.png";
+        return "https://api.nexusggr.eu/banners/{$providerCode}/{$gameCodeRaw}.png";
     }
 
     /**
@@ -466,6 +466,68 @@ class NexusGgrService
             'success' => ! empty($allGames),
             'status' => ! empty($allGames) ? 1 : 0,
             'games' => $allGames,
+        ];
+    }
+
+    /**
+     * Create Free Tour (Freespin Bundle for Pragmatic Play)
+     */
+    public function createFreeTour(
+        string $userCode,
+        string $gameCode,
+        int $betLevel = 1,
+        int $spinCount = 10,
+        float $maxAmount = 50.0,
+        ?string $expirationTime = null,
+        ?string $tourId = null
+    ): array {
+        $tourId = $tourId ?: 'ft_'.bin2hex(random_bytes(8));
+        $expirationTime = $expirationTime ?: now()->addDays(7)->toIso8601ZuluString();
+
+        $payload = [
+            'method' => 'tour_create',
+            'agent_code' => $this->agentCode,
+            'agent_token' => $this->agentToken,
+            'user_code' => $userCode,
+            'provider_code' => 'PRAGMATIC',
+            'game_code' => $gameCode,
+            'bet_level' => $betLevel,
+            'spin_count' => $spinCount,
+            'amount' => (int) round($maxAmount * 100), // In currency cents/smallest unit
+            'expiration_time' => $expirationTime,
+            'tour_id' => $tourId,
+        ];
+
+        Log::info('NexusGgrService: Sending tour_create', $payload);
+
+        try {
+            $response = Http::timeout(12)
+                ->withOptions(['force_ip_resolve' => 'v4'])
+                ->withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ])
+                ->post($this->apiServer, $payload);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                Log::info('NexusGgrService: tour_create response', $data ?? []);
+
+                return [
+                    'success' => (($data['status'] ?? 0) === 1),
+                    'data' => $data,
+                    'tour_id' => $data['tour_id'] ?? $tourId,
+                    'real_win' => $data['real_win'] ?? null,
+                    'msg' => $data['msg'] ?? ($response->successful() ? 'SUCCESS' : 'ERROR'),
+                ];
+            }
+        } catch (\Throwable $e) {
+            Log::error('NexusGgrService: tour_create exception: '.$e->getMessage());
+        }
+
+        return [
+            'success' => false,
+            'msg' => 'INTERNAL_ERROR',
         ];
     }
 }

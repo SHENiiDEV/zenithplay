@@ -31,7 +31,7 @@ class GenerateBotResponse extends Command
         $msgId = (int) $this->argument('msg_id');
         $userMsg = ChatMessage::find($msgId);
 
-        if (!$userMsg) {
+        if (! $userMsg) {
             return Command::FAILURE;
         }
 

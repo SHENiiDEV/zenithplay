@@ -14,9 +14,13 @@ class DepositSuccessfulMail extends Mailable
     use Queueable, SerializesModels;
 
     public User $user;
+
     public string $orderId;
+
     public float $usdAmount;
+
     public float $scGranted;
+
     public float $newBalance;
 
     public function __construct(User $user, string $orderId, float $usdAmount, float $scGranted, float $newBalance)
@@ -31,7 +35,7 @@ class DepositSuccessfulMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Receipt for Coin Purchase #' . $this->orderId . ' - Velox Play',
+            subject: 'Receipt for Coin Purchase #'.$this->orderId.' - ZenithPlay',
         );
     }
 

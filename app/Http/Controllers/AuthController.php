@@ -45,6 +45,24 @@ class AuthController extends Controller
     ];
 
     /**
+     * Show dedicated registration page.
+     */
+    public function showRegister(): InertiaResponse
+    {
+        return Inertia::render('Auth/Register', [
+            'excludedCountries' => static::$excludedCountries,
+        ]);
+    }
+
+    /**
+     * Show dedicated login page.
+     */
+    public function showLogin(): InertiaResponse
+    {
+        return Inertia::render('Auth/Login');
+    }
+
+    /**
      * Handle registration.
      */
     public function register(Request $request): RedirectResponse
@@ -117,6 +135,7 @@ class AuthController extends Controller
 
             if (Auth::user()->is_banned) {
                 Auth::logout();
+
                 return redirect()->back()->withErrors([
                     'email' => 'Your account has been blocked by administration.',
                 ]);
@@ -191,7 +210,7 @@ class AuthController extends Controller
             ->where('email', $request->email)
             ->first();
 
-        if (!$record || !hash_equals($record->token, $hashedToken)) {
+        if (! $record || ! hash_equals($record->token, $hashedToken)) {
             return redirect()->back()->withErrors([
                 'email' => 'This password reset token is invalid or has expired.',
             ]);
@@ -200,6 +219,7 @@ class AuthController extends Controller
         // Token expiry 60 minutes
         if (now()->diffInMinutes($record->created_at) > 60) {
             DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+
             return redirect()->back()->withErrors([
                 'email' => 'This password reset link has expired. Please request a new one.',
             ]);
@@ -207,7 +227,7 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return redirect()->back()->withErrors([
                 'email' => 'User not found.',
             ]);

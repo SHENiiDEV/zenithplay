@@ -12,7 +12,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user() || !$request->user()->is_admin) {
+        if (! $request->user() || ! $request->user()->is_admin) {
             abort(403, 'Unauthorized Admin Access');
         }
 

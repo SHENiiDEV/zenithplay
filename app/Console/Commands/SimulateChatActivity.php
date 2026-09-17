@@ -32,8 +32,9 @@ class SimulateChatActivity extends Command
 
         for ($i = 0; $i < $count; $i++) {
             $bot = User::where('is_bot', true)->inRandomOrder()->first();
-            if (!$bot) {
+            if (! $bot) {
                 $this->warn('No bot profiles found.');
+
                 return Command::FAILURE;
             }
 

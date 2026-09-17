@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ObsidianLogo from './ObsidianLogo';
-import ObsidianEmblemSvg from './ObsidianEmblemSvg';
+import ZenithLogo from './ZenithLogo';
+import ZenithEmblemSvg from './ZenithEmblemSvg';
 
 export default function AppLoadingScreen({ onFinish }) {
   const [progress, setProgress] = useState(15);
@@ -41,7 +41,7 @@ export default function AppLoadingScreen({ onFinish }) {
 
       {/* Top Header: Brand Logo */}
       <div className="relative z-10 flex items-center justify-between">
-        <ObsidianLogo className="h-10 sm:h-12" />
+        <ZenithLogo className="h-10 sm:h-12" />
         <div className="text-[10px] font-mono tracking-widest text-[#557086] uppercase">
           VELOX PLAY v2.0
         </div>
@@ -55,7 +55,7 @@ export default function AppLoadingScreen({ onFinish }) {
           <div className="absolute -inset-8 bg-gradient-to-r from-purple-500/30 via-blue-500/30 to-cyan-400/30 rounded-full blur-2xl animate-pulse" />
 
           <div className="relative w-32 h-40 sm:w-40 sm:h-48 bg-gradient-to-b from-[#1E2638] to-[#0D121D] border border-cyan-400/30 rounded-3xl p-4 shadow-2xl flex items-center justify-center transform hover:scale-105 transition-transform duration-500">
-            <ObsidianEmblemSvg className="w-full h-full drop-shadow-[0_0_25px_rgba(59,130,246,0.9)]" />
+            <ZenithEmblemSvg className="w-full h-full drop-shadow-[0_0_25px_rgba(59,130,246,0.9)]" />
           </div>
 
           <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 w-24 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 blur-[2px] opacity-80 animate-pulse" />

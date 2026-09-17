@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Welcome to Velox Play</title>
+    <title>Welcome to ZenithPlay</title>
     <style>
         body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #0F212E; color: #FFFFFF; margin: 0; padding: 20px; }
         .card { max-width: 550px; margin: 0 auto; background-color: #1A2C38; border: 1px solid #213743; border-radius: 16px; padding: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -23,11 +23,11 @@
     <div class="card">
         <div class="logo">
             <span class="badge">PROVABLY FAIR SOCIAL GAMING</span>
-            <h1>VELOX PLAY</h1>
+            <h1 style="color: #00E700;">{{ config('app.company.name', config('app.name', 'ZPlay')) }}</h1>
         </div>
 
-        <h2>Welcome to Velox Play, {{ $user->name }}! 💎</h2>
-        <p>Your account has been successfully created and verified.</p>
+        <h2>Welcome to {{ config('app.name', 'ZPlay') }}, {{ $user->name }}! 💎</h2>
+        <p>Your account has been successfully created.</p>
 
         <div class="info-box">
             <div class="info-row">
@@ -44,12 +44,15 @@
             </div>
         </div>
 
-        <p>Explore over 2,000+ certified slots, Pragmatic & Hacksaw titles, and provably fair games!</p>
+        <p>Explore over 2,400+ certified slots, Pragmatic, Hacksaw, PG Soft titles, and provably fair games!</p>
 
         <a href="{{ url('/') }}" class="btn">LAUNCH LOBBY</a>
 
         <div class="footer">
-            &copy; 2026 Velox Entertainment N.V. All rights reserved. <br>
+            &copy; {{ date('Y') }} {{ config('app.company.name', 'ZPlay') }}. All rights reserved. <br>
+            @if(config('app.company.address'))
+                {{ config('app.company.address') }} <br>
+            @endif
             Free-to-play sweepstakes social gaming platform. No real money gambling.
         </div>
     </div>

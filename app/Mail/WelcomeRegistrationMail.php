@@ -23,7 +23,7 @@ class WelcomeRegistrationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome to Velox Play!',
+            subject: 'Welcome to ZenithPlay!',
         );
     }
 

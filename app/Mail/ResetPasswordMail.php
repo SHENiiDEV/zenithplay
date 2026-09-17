@@ -14,20 +14,22 @@ class ResetPasswordMail extends Mailable
     use Queueable, SerializesModels;
 
     public User $user;
+
     public string $token;
+
     public string $resetUrl;
 
     public function __construct(User $user, string $token)
     {
         $this->user = $user;
         $this->token = $token;
-        $this->resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($user->email));
+        $this->resetUrl = url('/reset-password/'.$token.'?email='.urlencode($user->email));
     }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Reset Your Password - Velox Play',
+            subject: 'Reset Your Password - ZenithPlay',
         );
     }
 

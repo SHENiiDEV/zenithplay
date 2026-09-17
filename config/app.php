@@ -13,13 +13,14 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Velox Play'),
+    'name' => env('APP_NAME', 'ZPlay'),
 
     'company' => [
-        'name' => env('COMPANY_NAME', 'Velox Entertainment N.V.'),
+        'name' => env('COMPANY_NAME', env('COMPANTY_NAME', 'ZPlay Social Gaming Platform')),
+        'number' => env('COMPANY_NUMBER', env('COMPANY_REG_NUMBER', '164892')),
+        'reg_number' => env('COMPANY_NUMBER', env('COMPANY_REG_NUMBER', '164892')),
         'address' => env('COMPANY_ADDRESS', 'Heinekenstraat 44, Willemstad, Curaçao'),
-        'reg_number' => env('COMPANY_REG_NUMBER', '164892'),
-        'email' => env('COMPANY_EMAIL', 'support@velox-play.com'),
+        'email' => env('COMPANY_EMAIL', 'support@zplay.eu'),
     ],
 
     /*

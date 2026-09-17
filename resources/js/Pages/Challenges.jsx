@@ -16,7 +16,7 @@ export default function Challenges({ challenges = [] }) {
 
   return (
     <MainLayout>
-      <Head title="Velox Player Challenges & Quests" />
+      <Head title="ZenithPlayer Challenges & Quests" />
 
       <div className="max-w-6xl mx-auto space-y-8 pb-16">
         {/* Header Hero */}
@@ -26,7 +26,7 @@ export default function Challenges({ challenges = [] }) {
               <Trophy className="w-3.5 h-3.5" />
               <span>COMMUNITY QUEST BOARD</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-black text-white">Velox Challenges</h1>
+            <h1 className="text-3xl sm:text-4xl font-black text-white">ZenithPlay Challenges</h1>
             <p className="text-sm text-[#B1BAD3]">
               Complete deposit tiers and advance your account status to reach <strong className="text-amber-400">VIP Level 10</strong>.
             </p>

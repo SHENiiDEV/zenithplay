@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { 
   Gift, 
@@ -9,14 +9,23 @@ import {
   Award, 
   ShieldCheck, 
   Headphones, 
-  Building2,
-  Mail,
+  MessageSquare,
+  Send,
   Coins,
   X,
   Flame,
-  ChevronRight
+  ChevronDown,
+  ChevronUp,
+  Gamepad2,
+  Tv,
+  Dices,
+  Layers,
+  Rocket,
+  Fish,
+  Sparkles,
+  Ticket
 } from 'lucide-react';
-import ObsidianLogo from './ObsidianLogo';
+import ZenithLogo from './ZenithLogo';
 
 export default function LeftSidebar({ 
   isMobileOpen = false, 
@@ -26,24 +35,23 @@ export default function LeftSidebar({
 }) {
   const { auth, company } = usePage().props;
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
+  const [isCasinoOpen, setIsCasinoOpen] = useState(true);
 
-  const mainNav = [
-    { name: 'Casino Lobby', icon: Flame, link: '/' },
+  const casinoCategories = [
+    { name: 'Sport', icon: Trophy, link: '/?category=sports' },
+    { name: 'Live Casino', icon: Tv, link: '/?category=live' },
+    { name: 'Card Games', icon: Layers, link: '/?category=card' },
+    { name: 'Crash Games', icon: Rocket, link: '/?category=crash' },
+    { name: 'Slots', icon: Flame, link: '/?category=slots' },
+    { name: 'Fishing', icon: Fish, link: '/?category=fishing' },
+    { name: 'Lottery', icon: Ticket, link: '/?category=lottery' },
     { name: 'Promotions', icon: Gift, link: '/promotions' },
-    { name: 'Challenges', icon: Trophy, link: '/challenges' },
-    { name: 'Affiliate', icon: Users, link: '/affiliate' },
-    { name: 'VIP Club', icon: Crown, link: '/vip-club' },
-    { name: 'Coin Store', icon: Coins, link: '/store', highlight: true },
-    { name: 'Blog', icon: BookOpen, link: '/blog' },
+    { name: 'Tournaments', icon: Trophy, link: '/challenges' },
   ];
 
-  const secondaryNav = [
-    { name: 'Sponsorships', icon: Award, link: '/sponsorships' },
-    { name: 'Responsible Gaming', icon: ShieldCheck, link: '/responsible-gaming' },
-    { name: 'Player Support', icon: Headphones, link: '/support' },
-    { name: 'Fair Play & RNG', icon: ShieldCheck, link: '/fair-play' },
-    { name: 'Terms of Service', icon: BookOpen, link: '/terms' },
-    { name: 'Privacy Policy', icon: ShieldCheck, link: '/privacy' },
+  const supportNav = [
+    { name: 'Help Center & FAQ', icon: ShieldCheck, link: '/support' },
+    { name: '24/7 Support Desk', icon: Headphones, link: '/support' },
   ];
 
   return (
@@ -52,31 +60,29 @@ export default function LeftSidebar({
       {isMobileOpen && (
         <div 
           onClick={onClose}
-          className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm lg:hidden transition-opacity animate-fadeIn"
+          className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md lg:hidden transition-opacity"
           aria-hidden="true"
         />
       )}
 
-      {/* Sidebar / Drawer Container */}
+      {/* Sidebar Container */}
       <aside 
-        className={`fixed top-0 lg:top-16 bottom-0 z-50 lg:z-30 bg-[#0F212E] border-r border-[#213743] transition-all duration-300 flex flex-col shadow-2xl lg:shadow-none ${
-          // Mobile classes:
+        className={`fixed top-0 lg:top-16 bottom-0 z-50 lg:z-30 bg-[#070B0F] border-r border-[#1E2248] transition-all duration-300 flex flex-col shadow-2xl lg:shadow-none ${
           isMobileOpen 
             ? 'left-0 w-72 max-w-[85vw]' 
             : '-left-full lg:left-0'
         } ${
-          // Desktop classes:
-          isDesktopCollapsed ? 'lg:w-16' : 'lg:w-60'
+          isDesktopCollapsed ? 'lg:w-16' : 'lg:w-64'
         }`}
       >
         {/* Mobile Header with Logo & Close Button */}
-        <div className="flex lg:hidden items-center justify-between p-4 border-b border-[#213743] bg-[#1A2C38]/50">
-          <Link href="/" onClick={onClose} className="flex items-center gap-2">
-            <ObsidianLogo className="h-8 w-auto" />
+        <div className="flex lg:hidden items-center justify-between p-4 border-b border-[#1E2248] bg-[#0A0C22]">
+          <Link href="/" onClick={onClose} className="flex items-center">
+            <ZenithLogo className="h-8" />
           </Link>
           <button
             onClick={onClose}
-            className="p-2 text-[#B1BAD3] hover:text-white rounded-xl bg-[#1A2C38] border border-[#213743] hover:bg-[#213743] transition-colors"
+            className="p-2 text-[#8F9CAE] hover:text-white rounded-xl bg-[#0F1233] border border-[#1E2248] hover:border-[#00E700]/50 transition-colors"
             title="Close Menu"
           >
             <X className="w-5 h-5" />
@@ -85,123 +91,138 @@ export default function LeftSidebar({
 
         {/* Scrollable Navigation List */}
         <div className="p-3 space-y-4 overflow-y-auto flex-1 text-xs no-scrollbar">
-          {/* Main Navigation Stack */}
+          {/* Main Active "CASINO" Header Pill (Mockup Match) */}
           <div className="space-y-1">
-            <p className={`px-3 text-[10px] font-black uppercase tracking-wider text-[#557086] mb-2 ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
-              Gaming & Rewards
-            </p>
-            {mainNav.map((item) => {
-              const Icon = item.icon;
-              const isActive = currentPath === item.link;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.link}
-                  onClick={onClose}
-                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-bold transition-all group ${
-                    isActive
-                      ? 'bg-[#1475E1] text-white shadow-lg shadow-blue-500/20'
-                      : item.highlight
-                        ? 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20'
-                        : 'text-[#B1BAD3] hover:text-white hover:bg-[#1A2C38]'
-                  }`}
-                  title={item.name}
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <Icon className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
-                      isActive ? 'text-white' : item.highlight ? 'text-emerald-400' : 'text-[#1475E1]'
-                    }`} />
-                    <span className={`truncate ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
-                      {item.name}
-                    </span>
-                  </div>
-                  {item.highlight && (
-                    <span className={`px-1.5 py-0.5 text-[9px] font-black bg-emerald-400 text-black rounded uppercase ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
-                      Buy
-                    </span>
-                  )}
-                </Link>
-              );
-            })}
+            <button
+              onClick={() => setIsCasinoOpen(!isCasinoOpen)}
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-black text-xs bg-gradient-to-r from-[#14752A] to-[#00E700] text-black shadow-[0_0_15px_rgba(0,231,0,0.3)] transition-all hover:brightness-110"
+            >
+              <div className="flex items-center gap-2.5">
+                <Gamepad2 className="w-4 h-4 fill-black" />
+                <span className={`tracking-wider uppercase ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
+                  CASINO
+                </span>
+              </div>
+              <div className={`${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
+                {isCasinoOpen ? <ChevronUp className="w-4 h-4 stroke-[3]" /> : <ChevronDown className="w-4 h-4 stroke-[3]" />}
+              </div>
+            </button>
+
+            {/* Casino Submenu Items */}
+            {isCasinoOpen && (
+              <div className="space-y-0.5 pt-1 pl-1">
+                {casinoCategories.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = currentPath === item.link || (item.link.startsWith('/?category=') && currentCategory === item.link.split('=')[1]);
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.link}
+                      onClick={onClose}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl font-semibold transition-all group ${
+                        isActive
+                          ? 'bg-[#0F1233] text-[#00E700] border border-[#00E700]/30 shadow-inner'
+                          : 'text-[#8F9CAE] hover:text-white hover:bg-[#0A0C22]'
+                      }`}
+                      title={item.name}
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <Icon className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
+                          isActive ? 'text-[#00E700]' : 'text-[#8F9CAE]'
+                        }`} />
+                        <span className={`truncate text-xs ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
+                          {item.name}
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Promotions Widget Card (Mockup Match) */}
+          <div className={`pt-2 ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
+            <div className="p-3.5 rounded-2xl bg-gradient-to-b from-[#0F1233] to-[#0A0C22] border border-[#1E2248] shadow-lg relative overflow-hidden group">
+              <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-[#00E700]/10 rounded-full blur-xl group-hover:bg-[#00E700]/20 transition-all pointer-events-none" />
+              
+              <div className="flex items-center gap-2 text-[#F59E0B] font-black text-[11px] uppercase tracking-wider mb-1.5">
+                <Gift className="w-4 h-4 text-[#F59E0B] animate-bounce" />
+                <span>PROMOTIONS</span>
+              </div>
+
+              <h4 className="text-white font-bold text-xs">
+                Welcome Bonus
+              </h4>
+              <p className="text-[#00E700] font-black text-sm drop-shadow-[0_0_8px_rgba(0,231,0,0.5)] mt-0.5">
+                100% Up To $1,000
+              </p>
+
+              <Link
+                href="/promotions"
+                onClick={onClose}
+                className="mt-3 block w-full py-2 text-center text-xs font-black rounded-xl bg-gradient-to-r from-[#14752A] to-[#00E700] hover:brightness-110 text-black shadow-[0_0_12px_rgba(0,231,0,0.3)] transition-all hover:scale-105 active:scale-95"
+              >
+                Get Bonus
+              </Link>
+            </div>
           </div>
 
           {/* Divider */}
-          <div className="border-t border-[#213743] my-2" />
+          <div className="border-t border-[#1E2248] my-2" />
 
-          {/* Secondary Navigation */}
+          {/* Support & Contact Navigation */}
           <div className="space-y-1">
-            <p className={`px-3 text-[10px] font-black uppercase tracking-wider text-[#557086] mb-2 ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
-              Information & Trust
+            <p className={`px-3 text-[10px] font-black uppercase tracking-wider text-[#555E75] mb-2 ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
+              Support & Community
             </p>
-            {secondaryNav.map((item) => {
+            {supportNav.map((item) => {
               const Icon = item.icon;
-              const isActive = currentPath === item.link;
-              return (
+              return item.external ? (
+                <a
+                  key={item.name}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl font-semibold text-[#8F9CAE] hover:text-[#00E700] hover:bg-[#0A0C22] transition-all"
+                  title={item.name}
+                >
+                  <Icon className="w-4 h-4 shrink-0 text-[#00E700]" />
+                  <span className={`truncate text-xs ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
+                    {item.name}
+                  </span>
+                </a>
+              ) : (
                 <Link
                   key={item.name}
                   href={item.link}
                   onClick={onClose}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl font-bold transition-all group ${
-                    isActive
-                      ? 'bg-[#213743] text-white border border-[#1475E1]/40'
-                      : 'text-[#B1BAD3] hover:text-white hover:bg-[#1A2C38]'
-                  }`}
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl font-semibold text-[#8F9CAE] hover:text-white hover:bg-[#0A0C22] transition-all"
                   title={item.name}
                 >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <Icon className="w-4 h-4 text-[#557086] shrink-0 group-hover:scale-110 transition-transform" />
-                    <span className={`truncate ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
-                      {item.name}
-                    </span>
-                  </div>
+                  <Icon className="w-4 h-4 shrink-0 text-[#8F9CAE]" />
+                  <span className={`truncate text-xs ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
+                    {item.name}
+                  </span>
                 </Link>
               );
             })}
           </div>
 
-          {/* Admin Suite Option if Admin */}
+          {/* Admin Control Link */}
           {auth.user?.is_admin && (
-            <div className="pt-3 border-t border-[#213743]">
+            <div className="pt-2 border-t border-[#1E2248]">
               <Link
                 href="/admin"
                 onClick={onClose}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-xl font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 transition-all"
+                className="flex items-center gap-2.5 px-3 py-2 rounded-xl font-bold text-[#F59E0B] bg-[#F59E0B]/10 border border-[#F59E0B]/20 hover:bg-[#F59E0B]/20 transition-all"
                 title="Admin Control Panel"
               >
-                <ShieldCheck className="w-4 h-4 shrink-0 text-amber-400" />
-                <span className={`truncate ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>Admin Control Panel</span>
+                <ShieldCheck className="w-4 h-4 shrink-0 text-[#F59E0B]" />
+                <span className={`truncate text-xs ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>Admin Panel</span>
               </Link>
             </div>
           )}
-
-          {/* Company Info Box (.env Driven) */}
-          <div className="pt-3 border-t border-[#213743]">
-            <div className={`p-3 bg-[#1A2C38] border border-[#213743] rounded-xl space-y-1.5 text-[11px] text-[#B1BAD3] ${isDesktopCollapsed ? 'lg:hidden' : ''}`}>
-              <div className="flex items-center gap-2 font-bold text-white truncate">
-                <Building2 className="w-3.5 h-3.5 text-[#1475E1] shrink-0" />
-                <span className="truncate">{company?.name || 'Velox Entertainment N.V.'}</span>
-              </div>
-              {company?.address && (
-                <p className="text-[10px] leading-tight text-[#557086]">
-                  {company.address}
-                </p>
-              )}
-              {company?.reg_number && (
-                <p className="text-[10px] font-mono text-[#557086]">
-                  Reg No: {company.reg_number}
-                </p>
-              )}
-              {company?.email && (
-                <a
-                  href={`mailto:${company.email}`}
-                  className="pt-1 flex items-center gap-1.5 text-[11px] text-[#1475E1] hover:underline font-bold truncate block"
-                >
-                  <Mail className="w-3 h-3 shrink-0 text-[#1475E1]" />
-                  <span className="truncate">{company.email}</span>
-                </a>
-              )}
-            </div>
-          </div>
         </div>
       </aside>
     </>

@@ -1,4 +1,4 @@
-Reset Your Password - Velox Play
+Reset Your Password - ZenithPlay
 
 Hello {{ $user->name }},
 
@@ -9,4 +9,4 @@ Reset your password using the link below (valid for 60 minutes):
 
 If you did not request a password reset, you can safely ignore this message.
 
-© 2026 Velox Entertainment N.V. All rights reserved.
+© 2026 ZenithPlay Entertainment N.V. All rights reserved.

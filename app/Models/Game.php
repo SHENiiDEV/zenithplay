@@ -21,6 +21,7 @@ class Game extends Model
         'is_featured',
         'is_active',
         'play_count',
+        'sort_order',
     ];
 
     protected $casts = [
@@ -29,6 +30,7 @@ class Game extends Model
         'is_featured' => 'boolean',
         'is_active' => 'boolean',
         'play_count' => 'integer',
+        'sort_order' => 'integer',
     ];
 
     public function favorites()
