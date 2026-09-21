@@ -137,7 +137,7 @@ export default function Lobby({
 
   const heroSlides = [
     {
-      bgImage: '/images/hero-1.jpg',
+      bgImage: '/images/zenith-hero-1.png',
       badge: '✨ NEXT-GEN SOCIAL CASINO',
       title: 'SPIN, WIN & CELEBRATE',
       highlight: 'FREE TO PLAY CASINO',
@@ -154,7 +154,7 @@ export default function Lobby({
       secondaryButtonAction: () => router.visit('/store'),
     },
     {
-      bgImage: '/images/hero-2.jpg',
+      bgImage: '/images/zenith-hero-2.png',
       badge: '🏆 WEEKLY COMMUNITY RACES',
       title: 'COMPETE WITH FRIENDS',
       highlight: '50,000 SC PRIZE POOL',
@@ -165,7 +165,7 @@ export default function Lobby({
       secondaryButtonAction: () => router.visit('/promotions'),
     },
     {
-      bgImage: '/images/hero-3.jpg',
+      bgImage: '/images/zenith-hero-3.png',
       badge: '👑 VIP REWARDS & PROMOTIONS',
       title: 'LEVEL UP YOUR STATUS',
       highlight: 'EXCLUSIVE VIP PERKS',
